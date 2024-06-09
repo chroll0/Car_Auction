@@ -1,4 +1,4 @@
-![Screenshot 2024-06-09 164332](https://github.com/chroll0/Car_Auction/assets/89222386/a1b35fdb-1b5a-49fe-bf20-3e7718f62c28)
+![website](public/website.png)
 
 # Real-Time Car Auction 🚗
 
