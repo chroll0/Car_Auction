@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+@layer utilities {
+  .Poppins {
+    font-family: Poppins, sans-serif;
+  }
+  .Inika {
+    font-family: Inika, serif;
+  }
+  .paddingX {
+    @apply sm:px-16 px-6 xl:px-36 2xl:px-60;
+  }
+  .paddingY {
+    @apply sm:py-7 py-4;
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
