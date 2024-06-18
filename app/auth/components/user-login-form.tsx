@@ -86,7 +86,7 @@ export function UserLoginForm() {
           <div className="flex items-center">
             <label
               className="relative flex items-center p-3 rounded-full cursor-pointer"
-              htmlFor="description"
+              htmlFor="remember"
             >
               <input
                 type="checkbox"
@@ -94,7 +94,7 @@ export function UserLoginForm() {
               before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full
               before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-slate-300 checked:bg-indigo-100 
               checked:before:bg-slate-300 before:bg-slate-300 hover:before:opacity-10"
-                id="description"
+                id="remember"
               />
               <span className="absolute text-indigo-600 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
                 <svg
@@ -113,7 +113,6 @@ export function UserLoginForm() {
                 </svg>
               </span>
             </label>
-
             <label
               htmlFor="remember"
               className="block text-[11px] text-slate-400"

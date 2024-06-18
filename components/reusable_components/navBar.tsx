@@ -10,10 +10,9 @@ export default function Navbar() {
 
   return (
     <div className="paddingX paddingY flex justify-between">
-      <a href="/">
+      <Link href="/">
         <div className="text-[30px] font-extrabold">logo</div>
-      </a>
-
+      </Link>
       <div className="lg:flex hidden justify-around gap-12 items-center ml-10">
         {navLinks.map((link) => (
           <div className="flex items-center" key={link.id}>

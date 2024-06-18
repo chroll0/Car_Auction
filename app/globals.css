@@ -19,7 +19,6 @@
   .paddingY {
     @apply sm:py-7 py-4;
   }
-
   .grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }

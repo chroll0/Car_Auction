@@ -25,33 +25,35 @@ export default function Footer() {
         <h3 className="text-white font-extrabold text-[30px] text-center">
           Subscribe to our newsletter
         </h3>
-        <div className="flex lg:flex-row flex-col justify-center items-center gap-8 pb-6">
-          <label className="flex flex-col">
+        <form className="flex flex-col gap-8 justify-around items-end flex-wrap pb-4 px-8 md:flex-row w-full">
+          <label className="flex flex-col md:w-[280px] w-full">
             <input
               type="text"
               name="firstName"
               value={firstName}
               onChange={handleFirstNameChange}
               placeholder="First name"
-              className="py-2 px-3 h-[45px] w-[280px] rounded-[6px] outline-none bg-purple-10 text-[12px] tracking-wide"
+              className="py-2 px-3 h-[45px] rounded-[6px] outline-none bg-purple-10 text-[12px] tracking-wide"
             />
           </label>
-          <label className="flex flex-col">
+          <label className="flex flex-col md:w-[280px] w-full">
             <input
               type="text"
               name="email"
               value={email}
               onChange={handleEmailChange}
               placeholder="Email address"
-              className="py-2 px-3 h-[45px] w-[280px] rounded-[6px] outline-none bg-purple-10 text-[12px] tracking-wide"
+              className="py-2 px-3 h-[45px] rounded-[6px] outline-none bg-purple-10 text-[12px] tracking-wide"
             />
           </label>
-          <Button
-            type="submit"
-            title="Subscribe Now"
-            variant="text-[14px] font-semibold h-[45px] rounded-[6px] bg-black-100 text-indigo-100 w-[210px] shadow-3xl border px-4 py-2 border-slate-500 hover:bg-slate-200 hover:text-black-100"
-          />
-        </div>
+          <div className="md:w-[280px] w-full flex justify-center items-center h-[45px] rounded-[6px] bg-black-100 text-indigo-100 shadow-3xl border px-4 py-2 border-slate-500 hover:bg-slate-200 hover:text-black-100">
+            <Button
+              type="submit"
+              title="Subscribe Now"
+              variant="text-[15px] font-semibold"
+            />
+          </div>
+        </form>
       </div>
       <div className="pt-14 px-8">
         <div className="w-full flex md:flex-row flex-col justify-between gap-10">

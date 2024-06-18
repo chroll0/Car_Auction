@@ -1,34 +1,50 @@
-import { Card, CardContent } from "@/components/ui/card";
-// import { Icons } from "@/components/icons";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function Loading() {
+const Loading = () => {
   return (
-    <main
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "fit",
-        width: "fit",
-      }}
-    >
-      <Card>
-        <CardContent className="items-center justify-center justify-items-center">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <p className="text-3xl pt-6 text-center text-black m-6">
-              Loading..
-            </p>
-            {/* <Icons.spinner className="mr-4 h-fit w-fit animate-spin  text-primary" /> */}
+    <div className="flex flex-col p-6 space-y-6">
+      <div className="flex justify-center items-start flex-wrap gap-24">
+        <div className="max-w-md w-full lg:w-1/3 p-4">
+          <Skeleton className="h-52 w-full rounded-t-xl" />
+          <div className="py-4 space-y-2">
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-2/3" />
           </div>
-        </CardContent>
-      </Card>
-    </main>
+        </div>
+        <div className="max-w-md w-full lg:w-1/3 p-4">
+          <div className="py-4 space-y-2">
+            <Skeleton className="h-4 w-1/4" />
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center flex-wrap">
+        <div className="max-w-md w-full lg:w-1/4 p-4">
+          <Skeleton className="h-52 w-full rounded-t-xl" />
+          <div className="py-4 space-y-2">
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        </div>
+        <div className="max-w-md w-full lg:w-1/4 p-4">
+          <Skeleton className="h-52 w-full rounded-t-xl" />
+          <div className="py-4 space-y-2">
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        </div>
+        <div className="max-w-md w-full lg:w-1/4 p-4">
+          <Skeleton className="h-52 w-full rounded-t-xl" />
+          <div className="py-4 space-y-2">
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default Loading;

@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import Image from "next/image";
 import { useState } from "react";
 import Button from "./button";
@@ -25,18 +32,29 @@ const CarCard = ({
       </div>
       <div className="flex flex-col relative">
         <span className="uppercase text-[20px] font-extrabold">{price}</span>
-        {!current && (
-          <div
-            className="absolute top-1 right-0 cursor-pointer"
-            onClick={() => setFavorite(!favorite)}
-          >
-            {favorite ? (
-              <FaHeart className="text-[20px]" />
-            ) : (
-              <FaRegHeart className="text-[20px] transition-all hover:scale-110" />
-            )}
-          </div>
-        )}
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              {!current && (
+                <div
+                  className="absolute top-1 right-0 cursor-pointer"
+                  onClick={() => setFavorite(!favorite)}
+                >
+                  {favorite ? (
+                    <FaHeart className="text-[20px]" />
+                  ) : (
+                    <FaRegHeart className="text-[20px] transition-all hover:scale-110" />
+                  )}
+                </div>
+              )}
+            </TooltipTrigger>
+            <TooltipContent className="relative left-10">
+              {!favorite ? <p>Add to Favorite</p> : <p>Remove from Favorite</p>}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         <div className="mt-2">
           <h3 className="text-black-100 font-semibold uppercase tracking-wider text-[14px]">
             {carName}

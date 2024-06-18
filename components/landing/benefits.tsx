@@ -1,5 +1,5 @@
+import { Button } from "@/components/reusable_components";
 import Image from "next/image";
-import { Button } from "../reusable_components";
 
 const Benefits = () => {
   return (

@@ -1,6 +1,6 @@
+import { Button } from "@/components/reusable_components";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../reusable_components";
 
 const Hero = () => {
   return (

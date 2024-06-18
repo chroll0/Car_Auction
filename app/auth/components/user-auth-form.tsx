@@ -9,7 +9,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -66,7 +65,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             Choose Role
           </label>
           <Select>
-            <SelectTrigger className="w-fill p-2 rounded-md text-gray-500 border-none text-[12px]">
+            <SelectTrigger
+              className="w-full p-2 rounded-md text-gray-500 border-none text-[12px]"
+              id="role"
+            >
               <SelectValue placeholder="Select role" defaultValue="customer" />
             </SelectTrigger>
             <SelectContent className="absolute z-10 bg-white shadow-lg rounded-md">
@@ -183,7 +185,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <div className="flex items-center">
             <label
               className="relative flex items-center p-3 rounded-full cursor-pointer"
-              htmlFor="description"
+              htmlFor="terms"
             >
               <input
                 type="checkbox"
@@ -191,7 +193,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full
               before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-slate-300 checked:bg-indigo-100 
               checked:before:bg-slate-300 before:bg-slate-300 hover:before:opacity-10"
-                id="description"
+                id="terms"
               />
               <span className="absolute text-indigo-600 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
                 <svg
@@ -210,11 +212,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </svg>
               </span>
             </label>
-
-            <label
-              htmlFor="remember"
-              className="block text-[11px] text-slate-400"
-            >
+            <label htmlFor="terms" className="block text-[11px] text-slate-400">
               I accept the terms & Condition
             </label>
           </div>

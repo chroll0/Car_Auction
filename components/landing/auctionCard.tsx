@@ -7,9 +7,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Button, CarCard } from "../reusable_components";
+
 import { auctionInformation } from "@/constants/data";
-import SectionTitle from "../reusable_components/sectionTitle";
+import {
+  Button,
+  CarCard,
+  SectionTitle,
+} from "@/components/reusable_components";
 
 const AuctionCard = () => {
   return (
@@ -48,6 +52,7 @@ const AuctionCard = () => {
             type="button"
             title="See All"
             variant="bg-black-100 text-white mt-2 rounded-[12px] w-[110px] font-semibold px-4 py-2 text-[18px]"
+            link="/pages/auctions"
           />
         </div>
       </div>
@@ -87,6 +92,7 @@ const AuctionCard = () => {
             type="button"
             title="See All"
             variant="bg-black-100 text-white mt-2 rounded-[12px] w-[110px] font-semibold px-4 py-2 text-[18px]"
+            link="/pages/auctions"
           />
         </div>
       </div>
