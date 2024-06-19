@@ -189,6 +189,22 @@ export const auctionInformation = [
     endTime: "23/06/2024 22:00 AM",
   },
 ];
+
+export const carModels = [
+  {
+    imgUrl: "/img/models/bmw.png",
+    carModel: "BMW",
+  },
+  {
+    imgUrl: "/img/models/mercedes.png",
+    carModel: "mercedes",
+  },
+  {
+    imgUrl: "/img/models/tesla.png",
+    carModel: "tesla",
+  },
+];
+
 export const reviews = [
   {
     imgURL: "/img/user1.jpg",
