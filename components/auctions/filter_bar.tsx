@@ -75,7 +75,7 @@ const FilterBar = () => {
           <Button
             type="button"
             title="New car"
-            onClick={() => setCarType("new")}
+            // onClick={() => setCarType("new")}
             variant={
               carType === "new"
                 ? "bg-darkBlue-200 text-white border border-slate-300 rounded-[15px] w-[90px] py-2 px-2 text-[14px] font-medium"
@@ -85,7 +85,7 @@ const FilterBar = () => {
           <Button
             type="button"
             title="Used car"
-            onClick={() => setCarType("used")}
+            // onClick={() => setCarType("used")}
             variant={
               carType === "used"
                 ? "bg-darkBlue-200 text-white border border-slate-300 rounded-[15px] w-[90px] py-2 px-2 text-[14px] font-medium"
