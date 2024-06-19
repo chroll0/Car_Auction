@@ -6,9 +6,20 @@ import { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../reusable_components";
 
+// Define the type for car models
+type CarModel = "BMW" | "mercedes" | "tesla" | "all";
+
+// Define the type for the brands state
+type BrandsState = {
+  all: boolean;
+  BMW: boolean;
+  mercedes: boolean;
+  tesla: boolean;
+};
+
 const FilterBar = () => {
   const [carType, setCarType] = useState("new");
-  const [brands, setBrands] = useState({
+  const [brands, setBrands] = useState<BrandsState>({
     all: false,
     BMW: false,
     mercedes: false,
@@ -17,17 +28,17 @@ const FilterBar = () => {
 
   const [priceRange, setPriceRange] = useState({ from: 0, to: 0 });
 
-  const handleBrandChange = (brand) => {
+  const handleBrandChange = (brand: CarModel) => {
     setBrands((prev) => {
       const newBrands = { ...prev, [brand]: !prev[brand] };
       if (brand === "all") {
         const allChecked = !prev.all;
         return carModels.reduce(
           (acc, model) => {
-            acc[model.carModel] = allChecked;
+            acc[model.carModel as CarModel] = allChecked;
             return acc;
           },
-          { all: allChecked }
+          { all: allChecked } as BrandsState
         );
       } else {
         newBrands.all = false;
@@ -36,11 +47,11 @@ const FilterBar = () => {
     });
   };
 
-  const handlePriceChange = (e) => {
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPriceRange((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: Number(value),
     }));
   };
 
@@ -126,8 +137,10 @@ const FilterBar = () => {
               </div>
               <Checkbox
                 id={`brand-${model.carModel}`}
-                checked={brands[model.carModel]}
-                onCheckedChange={() => handleBrandChange(model.carModel)}
+                checked={brands[model.carModel as CarModel]}
+                onCheckedChange={() =>
+                  handleBrandChange(model.carModel as CarModel)
+                }
                 className="w-5 h-5 border rounded-[6px]"
               />
             </label>
