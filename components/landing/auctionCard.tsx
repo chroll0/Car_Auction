@@ -51,7 +51,7 @@ const AuctionCard = () => {
           <Button
             type="button"
             title="See All"
-            variant="bg-black-100 text-white mt-2 rounded-[12px] w-[110px] font-semibold px-4 py-2 text-[18px]"
+            variant="bg-black-100 text-white mt-2 rounded-[8px] w-[110px] font-semibold px-4 py-2 text-[18px] hover:w-[150px] transition"
             link="/pages/auctions"
           />
         </div>
@@ -91,7 +91,7 @@ const AuctionCard = () => {
           <Button
             type="button"
             title="See All"
-            variant="bg-black-100 text-white mt-2 rounded-[12px] w-[110px] font-semibold px-4 py-2 text-[18px]"
+            variant="bg-black-100 text-white mt-2 rounded-[8px] w-[110px] font-semibold px-4 py-2 text-[18px] hover:w-[150px] transition"
             link="/pages/auctions"
           />
         </div>

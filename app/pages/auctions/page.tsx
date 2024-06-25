@@ -6,14 +6,7 @@ const Auctions = () => {
       <SearchBar />
       <div className="flex gap-12">
         <FilterBar />
-        <div className="flex flex-wrap gap-10 items-center justify-around">
-          <AuctionsList />
-          <AuctionsList />
-          <AuctionsList />
-          <AuctionsList />
-          <AuctionsList />
-          <AuctionsList />
-        </div>
+        <AuctionsList />
       </div>
     </div>
   );

@@ -1,11 +1,16 @@
 export type CarCardProps = {
-  price: string;
+  price: number;
+  mileage: number;
   current: boolean;
   carName: string;
   lotNumber: string;
   endTime: string;
   startTime: string;
   imgURL: string;
+  brand: string;
+  condition: string;
+  type: string;
+  year: number;
 };
 
 export type CountdownTimerProps = {

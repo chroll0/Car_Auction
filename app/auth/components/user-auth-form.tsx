@@ -77,13 +77,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   value="customer"
                   className="cursor-pointer py-2.5 px-8 w-full text-sm text-slate-500 appearance-none"
                 >
-                  Customer
+                  Seller
                 </SelectItem>
                 <SelectItem
                   value="employer"
                   className="cursor-pointer py-2.5 px-8 w-full text-sm text-slate-500 appearance-none"
                 >
-                  Employer
+                  Buyer
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
