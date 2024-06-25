@@ -4,7 +4,7 @@ const Auctions = () => {
   return (
     <div className="flex flex-col paddingX paddingY gap-6">
       <SearchBar />
-      <div className="flex gap-12">
+      <div className="flex md:flex-row flex-col items-center md:items-start gap-12">
         <FilterBar />
         <AuctionsList />
       </div>

@@ -9,14 +9,14 @@ const Search_bar = () => {
 
   return (
     <div className="flex justify-between items-center md:gap-12 gap-6 md:flex-row flex-col-reverse">
-      <label className="cursor-pointer md:w-1/3 w-full">
+      <label className="cursor-pointer md:w-1/3 w-full flex justify-center md:justify-between">
         <input
           type="checkbox"
           checked={isChecked}
           onChange={() => setIsChecked(!isChecked)}
           className="peer sr-only"
         />
-        <div className="relative flex items-center border border-slate-300 rounded-[20px] h-[56px] max-w-[300px]">
+        <div className="relative flex items-center border border-slate-300 rounded-[20px] h-[56px] min-w-[270px]">
           <div
             className={`absolute top-0 bottom-0 left-0 w-1/2 h-full bg-darkBlue-200 rounded-[12px] transition-transform duration-300 ${
               isChecked ? "translate-x-full" : ""
