@@ -78,6 +78,7 @@ const CarCard = ({
               type="button"
               title="Bid now"
               variant="capitalize bg-skyBlue-100 text-black-100 rounded-[6px] min-w-[70px] text-[12px] hover:bg-slate-200 px-2 py-2 font-bold"
+              link="/pages/auction_details"
             />
           </div>
         )}

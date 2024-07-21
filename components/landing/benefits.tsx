@@ -77,11 +77,13 @@ const Benefits = () => {
           </div>
         </div>
 
-        <Button
-          type="button"
-          title="Let's start"
-          variant="bg-black-100 text-white mt-8 rounded-[12px] max-w-[130px] font-semibold px-4 py-2 text-[18px]"
-        />
+        <div className="flex justify-center w-full">
+          <Button
+            type="button"
+            title="Let's start"
+            variant="bg-black-100 text-white mt-8 rounded-[8px] w-[130px] font-semibold px-4 py-2 text-[18px] hover:w-[160px] transition"
+          />
+        </div>
       </div>
     </div>
   );

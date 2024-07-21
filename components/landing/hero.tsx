@@ -9,7 +9,7 @@ const Hero = () => {
         <div className="flex justify-center flex-col md:flex-row items-center gap-8 w-full">
           <div className="flex flex-1/2 flex-col gap-14 ">
             <div className="flex flex-col gap-2">
-              <h1 className="xl:min-w-[515px] text-[68px] font-extrabold tracking-[-0.75px] text-darkBlue-100 leading-[1.2] ">
+              <h1 className="xl:min-w-[515px] xl:text-[78px] lg:text-[62px] text-[50px] font-extrabold tracking-[0.75px] text-darkBlue-100 leading-[1.3] ">
                 Find your <br />
                 <span className="text-darkBlue-200">Perfect Match</span>
                 <br /> At Auction.

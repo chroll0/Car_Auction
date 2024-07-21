@@ -287,20 +287,20 @@ export const reviews = [
   {
     imgURL: "/img/user1.jpg",
     customerName: "Jane Brown",
-    rating: 3.7,
+    rating: 4.9,
     title: "Our Auction Process",
     date: "12/2/2024",
     feedback:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
   },
   {
     imgURL: "/img/user2.jpg",
     customerName: "Lota Mongeskar",
-    rating: 4.5,
+    rating: 4.8,
     title: "Our Auction Process",
     date: "10/2/2024",
     feedback:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+      "Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
   },
   {
     imgURL: "/img/user3.jpg",

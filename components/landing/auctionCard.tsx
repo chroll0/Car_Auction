@@ -45,7 +45,7 @@ const AuctionCard = () => {
               alt="threeDot"
               width={40}
               height={40}
-              style={{ width: "auto", height: "auto", cursor: "pointer" }}
+              style={{ width: "auto", height: "auto" }}
             />
           </div>
           <Button
@@ -85,7 +85,7 @@ const AuctionCard = () => {
               alt="threeDot"
               width={40}
               height={40}
-              style={{ width: "auto", height: "auto", cursor: "pointer" }}
+              style={{ width: "auto", height: "auto" }}
             />
           </div>
           <Button

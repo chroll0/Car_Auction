@@ -6,11 +6,14 @@ import { Tilt } from "react-tilt";
 
 const Testimonials = () => {
   return (
-    <div className="paddingX paddingY grid gap-12 md:grid-cols-1 xl:grid-cols-2">
+    <div className="paddingX paddingY flex flex-col lg:flex-row gap-12 h-full">
       {reviews.map((review) => (
-        <Tilt key={review.customerName}>
-          <div className="lg:col-span-2 xl:col-auto bg-lightGray-gradient">
-            <div className="flex flex-col justify-between w-full h-full border-none shadow-4xl px-8 py-8 gap-3">
+        <Tilt
+          key={review.customerName}
+          className="lg:w-[30%] w-full bg-lightGray-gradient border-none shadow-4xl"
+        >
+          <div className="px-8 py-8 flex flex-col justify-between h-full gap-2">
+            <div className="flex flex-col justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="text-[20px] font-semibold">
                   {review.rating.toFixed(1)}
@@ -64,22 +67,21 @@ const Testimonials = () => {
               <p className="text-[14px] text-gray-400 font-semibold leading-normal">
                 {review.feedback}
               </p>
-
-              <div className="flex items-center mt-4 space-x-3">
-                <div className="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
-                  <Image
-                    src={review.imgURL}
-                    width="45"
-                    height="45"
-                    alt="Avatar"
-                  />
+            </div>
+            <div className="flex items-center mt-4 space-x-3">
+              <div className="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
+                <Image
+                  src={review.imgURL}
+                  width="45"
+                  height="45"
+                  alt="Avatar"
+                />
+              </div>
+              <div>
+                <div className="text-md font-semibold">
+                  {review.customerName}
                 </div>
-                <div>
-                  <div className="text-md font-semibold">
-                    {review.customerName}
-                  </div>
-                  <div className="text-sm font-semibold">{review.date}</div>
-                </div>
+                <div className="text-sm font-semibold">{review.date}</div>
               </div>
             </div>
           </div>
