@@ -9,7 +9,7 @@ const Benefits = () => {
   return (
     <>
       <SectionTitle preTitle="Became a Buyer" title="Steps & Sign Up" />
-      <div className="flex flex-col md:flex-row items-center gap-12 w-full justify-center">
+      <div className="flex flex-col md:flex-row items-center gap-12 w-full justify-center mt-6">
         <motion.div
           variants={slideIn({
             direction: "left",
