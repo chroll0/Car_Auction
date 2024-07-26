@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import { FOOTER_LINKS } from "@/constants/data";
+import { FOOTER_LINKS } from "@/constants/static_data";
 import { Button } from ".";
 import { FaFacebookF, FaGithub, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";

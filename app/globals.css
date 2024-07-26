@@ -1,18 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow-x: hidden;
+}
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
-  .Poppins {
-    font-family: Poppins, sans-serif;
-  }
-  .Inika {
-    font-family: Inika, serif;
-  }
   .paddingX {
     @apply sm:px-16 px-6 xl:px-36 2xl:px-60;
   }
@@ -20,6 +23,7 @@
     @apply sm:py-7 py-4;
   }
   .grid-cols-3 {
-    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 1fr);
   }
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import { carModels } from "@/constants/data";
 import Image from "next/image";
 import { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
-import { Button } from "../reusable_components";
+import { Button } from "../reusable";
+import { carModels } from "@/constants/static_data";
 
 // Define the type for car models
 type CarModel = "BMW" | "mercedes" | "tesla" | "all";
@@ -66,7 +66,7 @@ const FilterBar = () => {
   };
 
   return (
-    <div className="max-w-[270px] h-auto pt-2 pb-6 shadow-4xl bg-slate-100 rounded-xl flex flex-col gap-4">
+    <div className="max-w-[290px] h-auto pt-2 pb-6 shadow-4xl bg-slate-100 rounded-xl flex flex-col gap-4">
       <div>
         <div className="px-4 py-3 flex justify-between items-center">
           <h3 className="text-[20px] font-bold">Filter</h3>

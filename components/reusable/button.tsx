@@ -15,7 +15,7 @@ const Button = ({ type, title, icon, variant, link }: ButtonProps) => {
     <Link href={link || "#"} prefetch={false}>
       <button className={`transition-all ${variant}`} type={type}>
         {icon && (
-          <div className="mr-2">
+          <div className="mr-4">
             <Image
               src={icon}
               alt={renderTitle(title) || "icon"}

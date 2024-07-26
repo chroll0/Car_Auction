@@ -1,5 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
+import { Tilt } from "react-tilt";
+import Image from "next/image";
+import Button from "./button";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+
 import {
   Tooltip,
   TooltipContent,
@@ -7,30 +14,33 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import Image from "next/image";
-import { useState } from "react";
-import Button from "./button";
-import { CarCardProps } from "@/types/carSectionTypes";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import CountdownTimer from "./countdownTimer ";
+import { useAuction } from "@/hooks/auction_context";
 
-const CarCard = ({
-  price,
-  current,
-  carName,
-  lotNumber,
-  endTime,
-  startTime,
-  imgURL,
-  mileage,
-  brand,
-  condition,
-  year,
-}: CarCardProps) => {
+const AuctionCarousel: React.FC<{ id: number }> = ({ id }) => {
+  const auctionInformation = useAuction();
   const [favorite, setFavorite] = useState(false);
+  const auctionItem = auctionInformation.find((item) => item.id === id);
+
+  if (!auctionItem)
+    return (
+      <Tilt
+        options={{ max: 15, scale: 1.01, speed: 250 }}
+        className="flex justify-center gap-6 w-[310px] cursor-grab max-h-[450px] shadow-3xl shadow-skyBlue-100 rounded-[20px] py-10 px-6"
+      >
+        <h3 className="text-black-100 font-semibold capitalize text-[16px]">
+          Car not found
+        </h3>
+      </Tilt>
+    );
+  const { imgURL, carName, price, lotNumber, endTime, startTime, current } =
+    auctionItem;
 
   return (
-    <div className="transition-all flex flex-col gap-6 w-[310px] cursor-grab max-h-[450px] shadow-3xl rounded-[20px] py-10 px-6 hover:scale-105">
+    <Tilt
+      options={{ max: 15, scale: 1.01, speed: 250 }}
+      className="flex flex-col gap-6 w-[310px] cursor-grab max-h-[450px] shadow-3xl shadow-skyBlue-100 rounded-[20px] py-10 px-6"
+    >
       <div className="flex items-center justify-center">
         <Image src={imgURL} alt={carName} width={280} height={200} />
       </div>
@@ -84,7 +94,7 @@ const CarCard = ({
         )}
         {!current && (
           <div className="flex justify-between items-end gap-4">
-            <div className="w-[50%] text-black-100 text-[13px] font-semibold mt-4">
+            <div className="w-[60%] text-black-100 text-[13px] font-semibold mt-4">
               Start at: <span>{startTime}</span>
             </div>
             <Button
@@ -95,8 +105,8 @@ const CarCard = ({
           </div>
         )}
       </div>
-    </div>
+    </Tilt>
   );
 };
 
-export default CarCard;
+export default AuctionCarousel;

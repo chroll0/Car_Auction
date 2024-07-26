@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { Button } from "@/components/reusable_components";
+import { Button } from "@/components/reusable";
 import Link from "next/link";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -37,26 +37,27 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   }
 
   return (
-    <div className="bg-white px-4 py-10 md:py-6 rounded-lg w-full">
-      <h2 className="text-[28px] font-bold text-black-100 text-center pb-6">
-        Welcome back to the Auction Community
+    <div className="bg-white px-8 py-10 md:py-6 rounded-lg w-full flex flex-col items-center gap-10">
+      <h2 className="text-[28px] font-bold text-black-100 text-center capitalize">
+        Welcome to <br />
+        the Auction Community
       </h2>
-      <div className="my-6 flex sm:flex-row flex-col gap-4">
+      <div className="flex justify-between 2xl:flex-row flex-col gap-6">
         <Button
           type="button"
-          title="Log In with Google"
+          title="Continue with Google"
           icon="/google.png"
-          variant="w-full px-4 py-3 mb-2 flex items-center justify-center bg-slate-100 hover:bg-indigo-100 text-slate-500 rounded-full text-[12px] font-medium"
+          variant="w-full px-4 py-[0.85rem] flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-100 text-slate-600 rounded-full text-[14px] font-semibold"
         />
         <Button
           type="button"
-          title="Log In with Facebook"
+          title="Continue with Facebook"
           icon="/facebook.png"
-          variant="w-full px-4 py-3 mb-2 flex items-center justify-center bg-slate-100 hover:bg-indigo-100 text-slate-500 rounded-full text-[12px] font-medium"
+          variant="w-full px-4 py-[0.85rem] flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-100 text-slate-600 rounded-full text-[14px] font-semibold"
         />
       </div>
 
-      <form onSubmit={onSubmit} className="space-y-6">
+      <form onSubmit={onSubmit} className="space-y-6 w-full max-w-[380px]">
         <div className="border-0 border-b-2">
           <label
             className="block px-2 text-[12px] font-medium text-gray-400"

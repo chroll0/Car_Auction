@@ -31,7 +31,7 @@ export default function RegistrationPage() {
             <div className="text-[30px] font-extrabold">logo</div>
             <div className="flex flex-col justify-center items-center gap-8">
               <Image
-                src="/images/signPageBg.png"
+                src="/landing/icons/signPageBg.png"
                 alt="auto"
                 width={300}
                 height={500}
@@ -58,7 +58,7 @@ export default function RegistrationPage() {
         ></Link> */}
 
           <div className="flex flex-1 lg:p-8">
-            <div className="mx-auto flex w-full flex-col justify-center space-y-6 max-w-[400px]">
+            <div className="mx-auto flex w-full flex-col justify-center space-y-6">
               <div className="relative h-full w-full ">
                 <Suspense fallback={<Loading />}>
                   <UserAuthForm />

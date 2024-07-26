@@ -16,15 +16,15 @@ const Search_bar = () => {
           onChange={() => setIsChecked(!isChecked)}
           className="peer sr-only"
         />
-        <div className="relative flex items-center border border-slate-300 rounded-[20px] h-[56px] min-w-[270px]">
+        <div className="relative flex items-center border border-slate-300 rounded-[8px] h-[55px] w-[290px] lg:w-[330px] text-[13px] lg:text-[15px] font-medium ">
           <div
-            className={`absolute top-0 bottom-0 left-0 w-1/2 h-full bg-darkBlue-200 rounded-[12px] transition-transform duration-300 ${
+            className={`absolute top-0 bottom-0 left-0 w-1/2 h-full bg-darkBlue-200 rounded-[6px] transition-transform duration-300 ${
               isChecked ? "translate-x-full" : ""
             }`}
           ></div>
 
           <div
-            className={`relative flex items-center justify-center w-1/2 h-full text-[15px] font-medium z-10 text-center ${
+            className={`relative flex items-center justify-center w-1/2 h-full z-10 text-center px-2 ${
               isChecked ? "text-gray-900" : "text-white"
             }`}
             onClick={() => setIsChecked(true)}
@@ -32,7 +32,7 @@ const Search_bar = () => {
             Current Auction
           </div>
           <div
-            className={`relative flex items-center justify-center w-1/2 h-full text-[15px] font-medium z-10 text-center ${
+            className={`relative flex items-center justify-center w-1/2 h-full z-10 text-center px-2 ${
               isChecked ? "text-white" : "text-gray-900"
             }`}
             onClick={() => setIsChecked(false)}

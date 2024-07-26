@@ -1,8 +1,8 @@
-import AuctionCard from "./auctionCard";
+import AvailableCars from "./availableCars";
 import Benefits from "./benefits";
 import Hero from "./hero";
 import Search from "./search";
 import Services from "./services";
 import Testimonials from "./testimonials";
 
-export { AuctionCard, Benefits, Hero, Search, Services, Testimonials };
+export { AvailableCars, Benefits, Hero, Search, Services, Testimonials };

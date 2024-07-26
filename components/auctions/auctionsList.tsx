@@ -1,7 +1,11 @@
-import { auctionInformation } from "@/constants/data";
+"use client";
+
 import CarCard from "./carCard";
+import { useAuction } from "@/hooks/auction_context";
 
 const AuctionsList = () => {
+  const auctionInformation = useAuction();
+
   return (
     <div className="flex flex-wrap gap-10 items-center justify-around">
       {auctionInformation

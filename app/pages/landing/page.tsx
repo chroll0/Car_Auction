@@ -1,36 +1,24 @@
+"use client";
+
 import {
-  AuctionCard,
+  AvailableCars,
   Benefits,
   Hero,
   Search,
   Testimonials,
 } from "@/components/landing";
 import Banner from "@/components/landing/services";
-import { Footer, SectionTitle } from "@/components/reusable_components";
+import { Footer } from "@/components/reusable";
 
 const Landing = () => {
   return (
     <main>
       <Hero />
       <Search />
-
-      <SectionTitle pretitle="Auction" title="Cars Available"></SectionTitle>
-      <AuctionCard />
-
-      <SectionTitle
-        pretitle="Became a Buyer"
-        title="Steps & Sign Up"
-      ></SectionTitle>
+      <AvailableCars title="Current Auctions" isCurrent={true} />
       <Benefits />
-
-      <SectionTitle pretitle="Customers" title="Reviews"></SectionTitle>
+      <AvailableCars title="Upcoming Auctions" isCurrent={false} />
       <Testimonials />
-
-      <SectionTitle
-        pretitle="How it works"
-        title="Our Auction Process"
-      ></SectionTitle>
-
       <Banner />
       <Footer />
     </main>

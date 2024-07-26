@@ -1,4 +1,5 @@
-export type CarCardProps = {
+export type InformationProps = {
+  id: number;
   price: number;
   mileage: number;
   current: boolean;
@@ -12,6 +13,11 @@ export type CarCardProps = {
   type: string;
   year: number;
 };
+
+export interface AvailableCarsProps {
+  title: string;
+  isCurrent: boolean;
+}
 
 export type CountdownTimerProps = {
   targetDate: string;

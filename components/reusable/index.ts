@@ -1,10 +1,11 @@
 import Button from "./button";
-import CarCard from "./carCard";
+import CarCard from "./auctionCarousel";
 import SectionTitle from "./sectionTitle";
 import CountdownTimer from "./countdownTimer ";
 import AuctionDataConverter from "./auctionDataConverter";
 import NavBar from "./navBar";
 import Footer from "./footer";
+import AuctionCarousel from "./auctionCarousel";
 
 export {
   Button,
@@ -14,4 +15,5 @@ export {
   AuctionDataConverter,
   NavBar,
   Footer,
+  AuctionCarousel,
 };

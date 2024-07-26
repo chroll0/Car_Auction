@@ -1,12 +1,17 @@
-import React from "react";
-import Landing from "./pages/landing/page";
+import React, { Suspense } from "react";
+import Loading from "./loading";
+import { AuctionProvider } from "@/hooks/auction_context";
 
-const page = () => {
+const Landing = React.lazy(() => import("./pages/landing/page"));
+
+const Page = () => {
   return (
-    <div>
-      <Landing />
-    </div>
+    <AuctionProvider>
+      <Suspense fallback={<Loading />}>
+        <Landing />
+      </Suspense>
+    </AuctionProvider>
   );
 };
 
-export default page;
+export default Page;

@@ -1,33 +1,47 @@
 "use client";
 
+import { useState } from "react";
+import { useAuction } from "@/hooks/auction_context";
+
 import Image from "next/image";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { Button, CountdownTimer } from "../reusable_components";
-import { CarCardProps } from "@/types/carSectionTypes";
+import { Button, CountdownTimer } from "../reusable";
 
-const CarCard = ({
-  price,
-  current,
-  carName,
-  lotNumber,
-  endTime,
-  startTime,
-  imgURL,
-  mileage,
-  brand,
-  condition,
-  year,
-}: CarCardProps) => {
+const CarCard: React.FC<{ id: number }> = ({ id }) => {
+  const auctionInformation = useAuction();
+  const auctionItem = auctionInformation.find((item) => item.id === id);
+
+  if (!auctionItem)
+    return (
+      <div className="flex justify-center gap-6 w-[310px] cursor-grab max-h-[450px] shadow-3xl shadow-skyBlue-100 rounded-[20px] py-10 px-6">
+        <h3 className="text-black-100 font-semibold capitalize text-[16px]">
+          Car not found
+        </h3>
+      </div>
+    );
+  const {
+    price,
+    current,
+    carName,
+    lotNumber,
+    endTime,
+    startTime,
+    imgURL,
+    mileage,
+    brand,
+    condition,
+    year,
+  } = auctionItem;
+
   const [favorite, setFavorite] = useState(false);
   return (
-    <div className="max-w-[280px] h-[410px] rounded-2xl overflow-hidden shadow-4xl bg-white px-5 py-6 flex gap-4 flex-col justify-between">
+    <div className="w-[290px] rounded-2xl overflow-hidden shadow-4xl bg-white px-5 py-6 flex gap-8 flex-col justify-between">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-lg font-bold">{carName}</h2>
@@ -55,11 +69,11 @@ const CarCard = ({
         </TooltipProvider>
       </div>
 
-      <div className="w-full">
+      <div className="w-full px-2">
         <Image
-          src="/lambo.png"
-          alt="lambo"
-          width={150}
+          src={imgURL}
+          alt={carName}
+          width={140}
           height={120}
           style={{ width: "auto", height: "auto", cursor: "pointer" }}
         />
