@@ -16,6 +16,7 @@ import { Button, CountdownTimer } from "../reusable";
 const CarCard: React.FC<{ id: number }> = ({ id }) => {
   const auctionInformation = useAuction();
   const auctionItem = auctionInformation.find((item) => item.id === id);
+  const [favorite, setFavorite] = useState(false);
 
   if (!auctionItem)
     return (
@@ -39,7 +40,6 @@ const CarCard: React.FC<{ id: number }> = ({ id }) => {
     year,
   } = auctionItem;
 
-  const [favorite, setFavorite] = useState(false);
   return (
     <div className="w-[290px] rounded-2xl overflow-hidden shadow-4xl bg-white px-5 py-6 flex gap-8 flex-col justify-between">
       <div className="flex justify-between items-start">
