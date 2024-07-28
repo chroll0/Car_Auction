@@ -33,13 +33,13 @@ const AvailableCars: React.FC<AvailableCarsProps> = ({ title, isCurrent }) => {
             orientation="horizontal"
           >
             <CarouselPrevious className="text-[80px] cursor-pointer" />
-            <CarouselContent className="-ml-4 px-6">
+            <CarouselContent>
               {isCurrent
                 ? auctionInformation
                     .filter((element) => element.current)
                     .map((element) => (
                       <CarouselItem
-                        className="pl-1 basis-auto 3xl:basis-1/4 px-8 py-8 flex justify-center"
+                        className="basis-auto 3xl:basis-1/4 px-8 py-8 flex justify-center"
                         key={element.lotNumber}
                       >
                         <AuctionCarousel {...element} />
@@ -49,7 +49,7 @@ const AvailableCars: React.FC<AvailableCarsProps> = ({ title, isCurrent }) => {
                     .filter((element) => !element.current)
                     .map((element) => (
                       <CarouselItem
-                        className="pl-1 basis-auto 3xl:basis-1/4 px-8 py-8 flex justify-center"
+                        className="basis-auto 3xl:basis-1/4 px-8 py-8 flex justify-center"
                         key={element.lotNumber}
                       >
                         <AuctionCarousel {...element} />

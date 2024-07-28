@@ -95,7 +95,29 @@ export const serviceLinks = [
     text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
   },
 ];
-
+export const benefits = [
+  {
+    imgUrl: "/landing/icons/libra.png",
+    alt: "libra",
+    title: "Deals For Every Budget",
+    paragraph:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since",
+  },
+  {
+    imgUrl: "/landing/icons/safety.png",
+    alt: "safety",
+    title: "Best Price Guaranteed",
+    paragraph:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since",
+  },
+  {
+    imgUrl: "/landing/icons/settings.png",
+    alt: "settings",
+    title: "Support 24/7",
+    paragraph:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since",
+  },
+];
 export const carModels = [
   {
     imgUrl: "/img/models/bmw.png",

@@ -25,7 +25,7 @@ const Hero = () => {
             Unlock unbeatable deals on top-quality cars.
           </span>
         </div>
-        <div className="w-full flex gap-8">
+        <div className="w-full flex gap-8 flex-wrap sm:flex-nowrap">
           <Button
             type="button"
             title="Buy a Car"
