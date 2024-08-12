@@ -20,7 +20,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="w-full paddingX paddingY">
+    <div className="w-full paddingX paddingY mt-4">
       <div className="flex flex-col justify-center items-center rounded-2xl bg-darkBlue-200 py-10 gap-8">
         <h3 className="text-white font-extrabold text-[30px] text-center">
           Subscribe to our newsletter

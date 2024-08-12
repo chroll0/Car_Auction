@@ -1,13 +1,9 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import Container from "@/public/img/container.png";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { UserAuthForm } from "@/app/auth/components/user-auth-form";
 import { Suspense } from "react";
+import Image from "next/image";
+
+import { UserAuthForm } from "@/app/auth/components/user-auth-form";
 import Loading from "@/app/loading";
-import { UserLoginForm } from "../components/user-login-form";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -16,14 +12,6 @@ export const metadata: Metadata = {
 
 export default function RegistrationPage() {
   return (
-    /* <div className="container relative  h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <Link
-          href="/auth/login"
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "absolute right-4 top-4 md:right-8 md:top-8"
-          )}
-        > */
     <main>
       <div className="paddingX py-20">
         <div className="shadow-4xl flex flex-col lg:flex-row">
@@ -48,14 +36,6 @@ export default function RegistrationPage() {
               </div>
             </div>
           </div>
-
-          {/* <Link
-          href="/auth/register"
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "absolute right-4 top-4 md:right-8 md:top-8"
-          )}
-        ></Link> */}
 
           <div className="flex flex-1 lg:p-8">
             <div className="mx-auto flex w-full flex-col justify-center space-y-6">

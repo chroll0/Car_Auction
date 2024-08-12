@@ -36,7 +36,6 @@ const Banner = () => {
                       width={100}
                       height={100}
                       priority={true}
-                      style={{ width: "auto", height: "auto" }}
                     />
                   </div>
                 </div>
@@ -51,7 +50,7 @@ const Banner = () => {
               {index !== 2 && (
                 <motion.div
                   variants={fadeIn({
-                    delay: 0.3,
+                    delay: index * 0.5,
                     duration: 0.75,
                   })}
                   className="absolute bottom-[75%] right-[-90px] hidden lg:block"
@@ -94,7 +93,6 @@ const Banner = () => {
                       width={100}
                       height={100}
                       priority={true}
-                      style={{ width: "auto", height: "auto" }}
                     />
                   </div>
                 </div>
@@ -109,7 +107,7 @@ const Banner = () => {
               {index !== 1 && (
                 <motion.div
                   variants={fadeIn({
-                    delay: 0.3,
+                    delay: (index + 3) * 0.5,
                     duration: 0.75,
                   })}
                   className="absolute bottom-[75%] right-[-90px] hidden lg:block"

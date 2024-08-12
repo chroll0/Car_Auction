@@ -1,9 +1,13 @@
 "use client";
 
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useState } from "react";
 
+import { useEffect, useState } from "react";
+import { Button } from "@/components/reusable";
+import Link from "next/link";
 import {
   Select,
   SelectContent,
@@ -12,29 +16,110 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import { registrationSchema } from "./validation-schema";
+import { handleChangeProps, UserProfile } from "@/types/authentication";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { Button } from "@/components/reusable";
-import Link from "next/link";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+export function UserAuthForm() {
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [userProfile, setUserProfile] = useState<UserProfile>(() => {
+    // Initialize state from localStorage
+    const savedProfile = localStorage.getItem("userProfile");
+    return savedProfile
+      ? JSON.parse(savedProfile)
+      : {
+          role: null,
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          number: "",
+          terms: false,
+        };
+  });
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-    setIsLoading(true);
+  const [activeState, setActiveState] = useState(() => {
+    // Initialize activeState from localStorage
+    const savedState = localStorage.getItem("activeState");
+    return savedState
+      ? JSON.parse(savedState)
+      : {
+          username: false,
+          email: false,
+          password: false,
+          confirmPassword: false,
+        };
+  });
+
+  useEffect(() => {
+    // Save both userProfile and activeState to localStorage whenever either changes
+    localStorage.setItem("userProfile", JSON.stringify(userProfile));
+    localStorage.setItem("activeState", JSON.stringify(activeState));
+  }, [userProfile, activeState]);
+
+  const handleFocus = (field: keyof UserProfile) => {
+    setActiveState((prev: typeof activeState) => ({
+      ...prev,
+      [field]: true,
+    }));
+  };
+
+  const handleBlur = (field: keyof UserProfile, value: string) => {
+    if (value === "") {
+      setActiveState((prev: typeof activeState) => ({
+        ...prev,
+        [field]: false,
+      }));
+    }
+  };
+
+  const handleChange: handleChangeProps = (field, value) => {
+    setValue(field, value, { shouldValidate: true });
+    setUserProfile((prevProfile) => ({
+      ...prevProfile,
+      [field]: value.trim(),
+    }));
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm({
+    defaultValues: {
+      role: userProfile.role || "buyer",
+      username: userProfile.username || "",
+      email: userProfile.email || "",
+      password: userProfile.password || "",
+      confirmPassword: userProfile.confirmPassword || "",
+      number: userProfile.number || "",
+      terms: userProfile.terms || false,
+    },
+    resolver: yupResolver(registrationSchema),
+  });
+
+  useEffect(() => {
+    // Sync form values with state
+    Object.keys(userProfile).forEach((key) => {
+      setValue(key as keyof UserProfile, userProfile[key as keyof UserProfile]);
+    });
+  }, [userProfile, setValue]);
+
+  const onSubmit: SubmitHandler<UserProfile> = (data) => {
+    setUserProfile(data);
+    console.log("Submitted Data:", data);
 
     setTimeout(() => {
-      setIsLoading(false);
+      localStorage.removeItem("userProfile");
+      localStorage.removeItem("activeState");
     }, 3000);
-  }
+  };
 
   return (
     <div className="bg-white px-8 py-10 md:py-6 rounded-lg w-full flex flex-col items-center gap-10">
@@ -42,47 +127,69 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         Welcome to <br />
         the Auction Community
       </h2>
-      <div className="flex justify-between 2xl:flex-row flex-col gap-6">
+      <div className="flex justify-center gap-6 flex-wrap w-full sm:flex-row flex-col capitalize font-medium text-[13px]">
         <Button
           type="button"
-          title="Continue with Google"
+          title="Google"
           icon="/google.png"
-          variant="w-full px-4 py-[0.85rem] flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-100 text-slate-600 rounded-full text-[14px] font-semibold"
+          link="https://www.facebook.com/"
+          variant="sm:w-[130px] w-full px-4 py-3 flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-200 text-slate-600 rounded-full"
         />
         <Button
           type="button"
-          title="Continue with Facebook"
+          title="Facebook"
           icon="/facebook.png"
-          variant="w-full px-4 py-[0.85rem] flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-100 text-slate-600 rounded-full text-[14px] font-semibold"
+          link="https://www.facebook.com/"
+          variant="sm:w-[130px] w-full px-4 py-3 flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-200 text-slate-600 rounded-full"
+        />
+        <Button
+          type="button"
+          title="Apple"
+          icon="/apple.png"
+          link="https://appleid.apple.com/"
+          variant="sm:w-[130px] w-full px-4 py-3 flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-200 text-slate-600 rounded-full"
         />
       </div>
 
-      <form onSubmit={onSubmit} className="space-y-6 w-full max-w-[380px]">
-        <div className="border-0 border-b-2">
-          <label
-            className="block px-2 text-[12px] font-medium text-gray-400"
-            htmlFor="role"
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-7 w-full max-w-[380px]"
+      >
+        <div className="border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
+          <div className="flex justify-between items-center">
+            <label
+              className="block px-2 text-[12px] font-semibold text-gray-500"
+              htmlFor="role"
+            >
+              Choose Role
+            </label>
+            <p className="flex justify-end text-red-500 text-[11px] px-2">
+              {errors.role?.message}
+            </p>
+          </div>
+          <Select
+            defaultValue={userProfile.role}
+            onValueChange={(value) =>
+              handleChange("role", value as "buyer" | "seller")
+            }
           >
-            Choose Role
-          </label>
-          <Select>
             <SelectTrigger
               className="w-full p-2 rounded-md text-gray-500 border-none text-[12px]"
               id="role"
             >
-              <SelectValue placeholder="Select role" defaultValue="customer" />
+              <SelectValue placeholder="Select role" />
             </SelectTrigger>
             <SelectContent className="absolute z-10 bg-white shadow-lg rounded-md">
               <SelectGroup>
                 <SelectItem
-                  value="customer"
-                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-slate-500 appearance-none"
+                  value="seller"
+                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-gray-500 appearance-none"
                 >
                   Seller
                 </SelectItem>
                 <SelectItem
-                  value="employer"
-                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-slate-500 appearance-none"
+                  value="buyer"
+                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-gray-500 appearance-none"
                 >
                   Buyer
                 </SelectItem>
@@ -92,71 +199,171 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         </div>
 
         <div>
-          <label
-            htmlFor="username"
-            className="block px-2 text-[12px] font-medium text-gray-400"
-          >
-            Username
-          </label>
+          <div className="flex justify-between items-center relative">
+            <label
+              htmlFor="username"
+              className={`px-2 font-semibold text-gray-500 capitalize absolute transition-all duration-200 ${
+                activeState.username
+                  ? "top-[-15px] text-[11px]"
+                  : "top-[8px] text-[13px]"
+              }`}
+            >
+              username
+            </label>
+            <p
+              className={`absolute right-1 flex justify-end text-red-500 px-2 transition-all
+            ${
+              activeState.username
+                ? "top-[-15px] text-[11px]"
+                : "top-[8px] text-[11.5px]"
+            }`}
+            >
+              {errors.username?.message}
+            </p>
+          </div>
           <input
             type="text"
             id="username"
-            name="username"
-            placeholder="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="p-2 w-full rounded-md text-gray-500 border-b-2 text-[12px]"
+            {...register("username")}
+            onFocus={() => handleFocus("username")}
+            onBlur={(e) => handleBlur("username", e.target.value)}
+            onChange={(e) => handleChange("username", e.target.value)}
+            className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="block px-2 text-[12px] font-medium text-gray-400"
-          >
-            Email
-          </label>
+          <div className="flex justify-between items-center relative">
+            <label
+              htmlFor="email"
+              className={`px-2 font-semibold text-gray-500 capitalize absolute transition-all duration-200 ${
+                activeState.email
+                  ? "top-[-15px] text-[11px]"
+                  : "top-[8px] text-[13px]"
+              }`}
+            >
+              email
+            </label>
+            <p
+              className={`absolute right-1 flex justify-end text-red-500 px-2 transition-all
+            ${
+              activeState.email
+                ? "top-[-15px] text-[11px]"
+                : "top-[8px] text-[11.5px]"
+            }`}
+            >
+              {errors.email?.message}
+            </p>
+          </div>
           <input
             type="text"
             id="email"
-            name="email"
-            placeholder="example@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="p-2 w-full rounded-md text-gray-500 border-b-2 text-[12px]"
+            {...register("email")}
+            onFocus={() => handleFocus("email")}
+            onBlur={(e) => handleBlur("email", e.target.value)}
+            onChange={(e) => handleChange("email", e.target.value)}
+            className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
         </div>
 
-        <div>
-          <label
-            htmlFor="password"
-            className="block px-2 text-[12px] font-medium text-gray-400"
-          >
-            Password
-          </label>
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="p-2 w-full rounded-md text-gray-500 border-b-2 text-[12px]"
-            />
-            <span
-              className="absolute inset-y-3 right-4 flex items-end cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
+        <div className="relative">
+          <div className="flex justify-between items-center relative">
+            <label
+              htmlFor="password"
+              className={`px-2 font-semibold text-gray-500 capitalize absolute transition-all duration-200 ${
+                activeState.password
+                  ? "top-[-15px] text-[11px]"
+                  : "top-[8px] text-[13px]"
+              }`}
             >
-              {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
-            </span>
+              password
+            </label>
+            <p
+              className={`absolute right-3 flex justify-end text-red-500 px-2 transition-all
+            ${
+              activeState.password
+                ? "top-[-15px] text-[11px]"
+                : "top-[8px] text-[11.5px]"
+            }`}
+            >
+              {errors.password?.message}
+            </p>
           </div>
+          <input
+            type={showPassword.password ? "text" : "password"}
+            id="password"
+            {...register("password")}
+            onFocus={() => handleFocus("password")}
+            onBlur={(e) => handleBlur("password", e.target.value)}
+            onChange={(e) => handleChange("password", e.target.value)}
+            className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
+          />
+          <span
+            className="absolute inset-y-6 right-0 flex items-end cursor-pointer"
+            onClick={() =>
+              setShowPassword((prevState) => ({
+                ...prevState,
+                password: !prevState.password,
+              }))
+            }
+          >
+            {showPassword.password ? <IoEyeOffOutline /> : <IoEyeOutline />}
+          </span>
         </div>
 
-        <PhoneInput
+        <div className="relative">
+          <div className="flex justify-between items-center relative">
+            <label
+              htmlFor="confirmPassword"
+              className={`px-2 font-semibold text-gray-500 capitalize absolute transition-all duration-200 ${
+                activeState.confirmPassword
+                  ? "top-[-15px] text-[11px]"
+                  : "top-[8px] text-[13px]"
+              }`}
+            >
+              confirm password
+            </label>
+            <p
+              className={`absolute right-3 flex justify-end text-red-500 px-2 transition-all
+            ${
+              activeState.confirmPassword
+                ? "top-[-15px] text-[11px]"
+                : "top-[8px] text-[11.5px]"
+            }`}
+            >
+              {errors.confirmPassword?.message}
+            </p>
+          </div>
+          <input
+            type={showPassword.confirmPassword ? "text" : "password"}
+            id="confirmPassword"
+            {...register("confirmPassword")}
+            onFocus={() => handleFocus("confirmPassword")}
+            onBlur={(e) => handleBlur("confirmPassword", e.target.value)}
+            onChange={(e) => handleChange("confirmPassword", e.target.value)}
+            className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
+          />
+          <span
+            className="absolute inset-y-6 right-0 flex items-end cursor-pointer"
+            onClick={() =>
+              setShowPassword((prevState) => ({
+                ...prevState,
+                confirmPassword: !prevState.confirmPassword,
+              }))
+            }
+          >
+            {showPassword.confirmPassword ? (
+              <IoEyeOffOutline />
+            ) : (
+              <IoEyeOutline />
+            )}
+          </span>
+        </div>
+
+        {/* <PhoneInput
           country={"ge"}
-          value={phone}
-          onChange={setPhone}
+          value={userProfile.number || ""}
+          onChange={(value) => handleChange("number", value)}
           inputStyle={{
             width: "100%",
             border: "none",
@@ -180,7 +387,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             alignItems: "center",
             width: "100%",
           }}
-        />
+        /> */}
+        {/* <p className="text-red-500 text-sm">{errors.number?.message}</p> */}
 
         <div className="flex items-center sm:flex-row flex-col justify-between gap-4 sm:gap-10">
           <div className="flex items-center">
@@ -190,11 +398,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             >
               <input
                 type="checkbox"
-                className="peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all before:absolute
-              before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full
-              before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-slate-300 checked:bg-indigo-100 
-              checked:before:bg-slate-300 before:bg-slate-300 hover:before:opacity-10"
+                className="peer relative h-4 w-4 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all before:absolute
+                before:top-2/4 before:left-2/4 before:block before:h-9 before:w-9 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full
+                before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-slate-300 checked:bg-indigo-100 
+                checked:before:bg-slate-300 before:bg-slate-300 hover:before:opacity-10"
                 id="terms"
+                {...register("terms")}
               />
               <span className="absolute text-indigo-600 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
                 <svg
@@ -213,7 +422,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </svg>
               </span>
             </label>
-            <label htmlFor="terms" className="block text-[11px] text-slate-400">
+            <label
+              htmlFor="terms"
+              className={`${
+                errors.terms ? "text-red-500" : "text-indigo-400"
+              } block text-[11px] cursor-pointer`}
+            >
               I accept the terms & Condition
             </label>
           </div>
@@ -221,15 +435,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             type="submit"
             title="Sign up"
             variant="w-[120px] py-3 flex items-center justify-center bg-darkBlue-200 text-white uppercase rounded-full text-[14px] font-semibold"
+            action={handleSubmit(onSubmit)}
           />
         </div>
 
         <div className="mt-10 text-center">
           <p className="text-[13px] text-gray-600">
-            Own an Account?{" "}
+            Own an Account?
             <Link
               href="/auth/login"
-              className="text-black-100 font-bold hover:underline hover:text-blue-700"
+              className="text-black-100 font-bold hover:underline hover:text-blue-700 ml-2"
             >
               JUMP RIGHT IN
             </Link>

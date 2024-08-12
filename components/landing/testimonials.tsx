@@ -75,7 +75,7 @@ const Testimonials = () => {
                   </div>
                 </div>
 
-                <h4 className="text-[22px] capitalize font-semibold">
+                <h4 className="text-[20px] capitalize font-semibold">
                   {review.title}
                 </h4>
                 <p className="text-[14px] text-gray-400 font-semibold leading-normal">

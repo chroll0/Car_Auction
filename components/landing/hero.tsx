@@ -22,7 +22,8 @@ const Hero = () => {
             <br /> At Auction.
           </h1>
           <span className="text-[18px] font-semibold">
-            Unlock unbeatable deals on top-quality cars.
+            Unlock unbeatable deals on top-quality vehicles. <br /> Start
+            bidding now!
           </span>
         </div>
         <div className="w-full flex gap-8 flex-wrap sm:flex-nowrap">

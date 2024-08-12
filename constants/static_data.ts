@@ -67,32 +67,32 @@ export const serviceLinks = [
   {
     number: "1",
     icon: "/landing/icons/icon-contact.png",
-    title: "Our Auction Process",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+    title: "Register an Account",
+    text: "Create a free account to start bidding. Fill out your details, verify your email, and you're all set to participate in our auctions.",
   },
   {
     number: "2",
-    icon: "/landing/icons/icon-cursor.png",
-    title: "Our Auction Process",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+    icon: "/landing/icons/icon-doc.png",
+    title: "Browse Vehicles",
+    text: "Explore our wide selection of cars. Use our advanced search filters to find the perfect vehicle that fits your needs and budget.",
   },
   {
     number: "3",
-    icon: "/landing/icons/icon-achievement.png",
-    title: "Our Auction Process",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+    icon: "/landing/icons/icon-cursor.png",
+    title: "Place Your Bid",
+    text: "Join the live auction and place your bids in real-time. Compete with other bidders and make sure you keep an eye on the countdown timer.",
   },
   {
     number: "4",
-    icon: "/landing/icons/icon-doc.png",
-    title: "Our Auction Process",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+    icon: "/landing/icons/icon-achievement.png",
+    title: "Win the Auction",
+    text: "If you have the highest bid when the auction ends, congratulations! You’ll receive a notification and further instructions on completing the purchase.",
   },
   {
     number: "5",
     icon: "/landing/icons/icon-box.png",
-    title: "Our Auction Process",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+    title: "Finalize Purchase",
+    text: "Complete the payment process and arrange for vehicle delivery or pickup. Enjoy your new car!",
   },
 ];
 export const benefits = [
@@ -101,21 +101,21 @@ export const benefits = [
     alt: "libra",
     title: "Deals For Every Budget",
     paragraph:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since",
+      "Find the perfect car within your budget. Our platform offers a wide range of vehicles to suit every financial plan. Whether you're looking for a budget-friendly option or a high-end luxury car, we've got you covered.",
   },
   {
     imgUrl: "/landing/icons/safety.png",
     alt: "safety",
     title: "Best Price Guaranteed",
     paragraph:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since",
+      "We ensure you get the best deals on all cars. Our real-time auction platform allows you to bid confidently, knowing that you are getting the most competitive prices available. Join our auctions and secure your dream car at the best possible price.",
   },
   {
     imgUrl: "/landing/icons/settings.png",
     alt: "settings",
     title: "Support 24/7",
     paragraph:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since",
+      "Our customer support team is available around the clock to assist you with any inquiries or issues. Whether you need help with the auction process, payment, or delivery, we're here to ensure a smooth and satisfying experience.",
   },
 ];
 export const carModels = [
@@ -138,28 +138,28 @@ export const reviews = [
     imgURL: "/landing/user1.jpg",
     customerName: "Jane Brown",
     rating: 4.9,
-    title: "Our Auction Process",
-    date: "12/2/2024",
+    title: "Excellent Auction Experience!",
+    date: "12/02/2024",
     feedback:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+      "I had a fantastic experience using this auction platform. The process was straightforward, and I got a great deal on my car. Highly recommended!",
   },
   {
     imgURL: "/landing/user2.jpg",
     customerName: "Lota Mongeskar",
     rating: 4.8,
-    title: "Our Auction Process",
-    date: "10/2/2024",
+    title: "Smooth and Reliable",
+    date: "10/02/2024",
     feedback:
-      "Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "The auction was smooth and the interface was user-friendly. I appreciated the real-time updates and customer support was very helpful.",
   },
   {
     imgURL: "/landing/user3.jpg",
     customerName: "Morich Brown",
     rating: 5.0,
-    title: "Our Auction Process",
-    date: "11/2/2024",
+    title: "Outstanding Service!",
+    date: "11/02/2024",
     feedback:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
+      "I couldn't be happier with my purchase. The auction was exciting, and I got my dream car at an unbeatable price. Will definitely use this service again!",
   },
 ];
 

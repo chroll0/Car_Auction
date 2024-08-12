@@ -1,12 +1,8 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { UserLoginForm } from "@/app/auth/components/user-login-form";
-import Container from "@/public/img/container.png";
 import { Suspense } from "react";
+
+import { UserLoginForm } from "@/app/auth/components/user-login-form";
 import Loading from "@/app/loading";
 
 export const metadata: Metadata = {
@@ -19,7 +15,7 @@ export default function LoginPage() {
     <main>
       <div className="paddingX py-20">
         <div className="shadow-4xl flex flex-col lg:flex-row">
-          <div className="w-full h-full p-8 flex flex-1 flex-col gap-8 bg-darkBlue-200">
+          <div className="w-full p-8 flex flex-1 flex-col gap-8 bg-darkBlue-200">
             <div className="text-[30px] font-extrabold">logo</div>
             <div className="flex flex-col justify-center items-center gap-8">
               <Image
@@ -40,14 +36,6 @@ export default function LoginPage() {
               </div>
             </div>
           </div>
-
-          {/* <Link
-          href="/auth/register"
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "absolute right-4 top-4 md:right-8 md:top-8"
-          )}
-        ></Link> */}
 
           <div className="flex flex-1 lg:p-8">
             <div className="mx-auto flex w-full flex-col justify-center space-y-6">

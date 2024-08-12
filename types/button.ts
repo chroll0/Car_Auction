@@ -7,4 +7,5 @@ export type ButtonProps = {
   variant: string;
   full?: boolean;
   link?: string;
+  action?: VoidFunction;
 };

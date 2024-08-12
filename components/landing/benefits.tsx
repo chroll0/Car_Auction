@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import { slideIn } from "../utils/motion";
+import { slideIn, textVariant } from "../utils/motion";
 import { Button, SectionTitle } from "@/components/reusable";
 import { SectionWrapper } from "../hoc";
 import { benefits } from "@/constants/static_data";
@@ -18,6 +18,7 @@ const Benefits = () => {
             delay: 0.1,
             duration: 0.75,
           })}
+          className="min-w-[250px]"
         >
           <Image
             src="/landing/agreement.png"
@@ -55,21 +56,27 @@ const Benefits = () => {
                 <h5 className="text-[18px] md:text-[20px] font-semibold">
                   {element.title}
                 </h5>
-                <p className="text-[12px] md:text-[14px] font-medium text-gray-100">
+                <p className="text-[12px] md:text-[14px] font-medium text-gray-100 text-justify">
                   {element.paragraph}
                 </p>
               </div>
             </div>
           ))}
-          <div className="flex justify-center w-full">
-            <Button
-              type="button"
-              title="Let's start"
-              variant="bg-black-100 text-white mt-4 rounded-[8px] w-[130px] font-semibold px-4 py-2 text-[18px] hover:w-[160px] transition"
-            />
-          </div>
         </motion.div>
       </div>
+      <motion.div
+        variants={textVariant({ delay: 0.1 })}
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+        className="flex justify-center w-full"
+      >
+        <Button
+          type="button"
+          title="Let's start"
+          variant="bg-black-100 text-white mt-8 rounded-[8px] w-[130px] font-semibold px-4 py-2 text-[18px] hover:w-[160px] transition"
+        />
+      </motion.div>
     </>
   );
 };
