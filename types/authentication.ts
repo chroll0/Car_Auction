@@ -5,7 +5,7 @@ export type ContextType = {
   setUserProfile: Dispatch<SetStateAction<UserProfile>>;
 };
 export type UserProfile = {
-  role: "buyer" | "seller";
+  role: undefined | "buyer" | "seller";
   username: string;
   email: string;
   password: string;

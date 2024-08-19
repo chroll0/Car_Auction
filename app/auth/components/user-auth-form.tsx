@@ -1,10 +1,8 @@
 "use client";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
 import { useEffect, useState } from "react";
 import { Button } from "@/components/reusable";
 import Link from "next/link";
@@ -26,43 +24,48 @@ export function UserAuthForm() {
     confirmPassword: false,
   });
 
-  const [userProfile, setUserProfile] = useState<UserProfile>(() => {
-    // Initialize state from localStorage
-    const savedProfile = localStorage.getItem("userProfile");
-    return savedProfile
-      ? JSON.parse(savedProfile)
-      : {
-          role: null,
-          username: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-          number: "",
-          terms: false,
-        };
+  const [isMounted, setIsMounted] = useState(false); // Track mounting
+
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    role: undefined,
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    number: "",
+    terms: false,
   });
 
-  const [activeState, setActiveState] = useState(() => {
-    // Initialize activeState from localStorage
-    const savedState = localStorage.getItem("activeState");
-    return savedState
-      ? JSON.parse(savedState)
-      : {
-          username: false,
-          email: false,
-          password: false,
-          confirmPassword: false,
-        };
+  const [activeState, setActiveState] = useState({
+    username: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
   });
 
   useEffect(() => {
-    // Save both userProfile and activeState to localStorage whenever either changes
-    localStorage.setItem("userProfile", JSON.stringify(userProfile));
-    localStorage.setItem("activeState", JSON.stringify(activeState));
-  }, [userProfile, activeState]);
+    setIsMounted(true); // Mark component as mounted
+
+    if (typeof window !== "undefined") {
+      // Load userProfile and activeState from localStorage
+      const savedProfile = localStorage.getItem("userProfile");
+      const savedState = localStorage.getItem("activeState");
+
+      if (savedProfile) setUserProfile(JSON.parse(savedProfile));
+      if (savedState) setActiveState(JSON.parse(savedState));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMounted && typeof window !== "undefined") {
+      // Save to localStorage only after the component has mounted
+      localStorage.setItem("userProfile", JSON.stringify(userProfile));
+      localStorage.setItem("activeState", JSON.stringify(activeState));
+    }
+  }, [userProfile, activeState, isMounted]);
 
   const handleFocus = (field: keyof UserProfile) => {
-    setActiveState((prev: typeof activeState) => ({
+    setActiveState((prev) => ({
       ...prev,
       [field]: true,
     }));
@@ -70,7 +73,7 @@ export function UserAuthForm() {
 
   const handleBlur = (field: keyof UserProfile, value: string) => {
     if (value === "") {
-      setActiveState((prev: typeof activeState) => ({
+      setActiveState((prev) => ({
         ...prev,
         [field]: false,
       }));
@@ -88,12 +91,11 @@ export function UserAuthForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setValue,
-    watch,
+    formState: { errors },
   } = useForm({
     defaultValues: {
-      role: userProfile.role || "buyer",
+      role: userProfile.role || undefined,
       username: userProfile.username || "",
       email: userProfile.email || "",
       password: userProfile.password || "",
@@ -105,9 +107,9 @@ export function UserAuthForm() {
   });
 
   useEffect(() => {
-    // Sync form values with state
     Object.keys(userProfile).forEach((key) => {
-      setValue(key as keyof UserProfile, userProfile[key as keyof UserProfile]);
+      const value = userProfile[key as keyof UserProfile];
+      setValue(key as keyof UserProfile, value === null ? undefined : value);
     });
   }, [userProfile, setValue]);
 
@@ -116,10 +118,12 @@ export function UserAuthForm() {
     console.log("Submitted Data:", data);
 
     setTimeout(() => {
-      localStorage.removeItem("userProfile");
-      localStorage.removeItem("activeState");
+      localStorage.clear();
     }, 3000);
   };
+
+  // Conditional rendering to avoid SSR/client mismatch
+  if (!isMounted) return null;
 
   return (
     <div className="bg-white px-8 py-10 md:py-6 rounded-lg w-full flex flex-col items-center gap-10">
@@ -158,17 +162,17 @@ export function UserAuthForm() {
         <div className="border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
           <div className="flex justify-between items-center">
             <label
-              className="block px-2 text-[12px] font-semibold text-gray-500"
+              className="block px-2 text-[13px] font-semibold text-gray-500 capitalize"
               htmlFor="role"
             >
-              Choose Role
+              role
             </label>
             <p className="flex justify-end text-red-500 text-[11px] px-2">
               {errors.role?.message}
             </p>
           </div>
           <Select
-            defaultValue={userProfile.role}
+            defaultValue={userProfile.role || ""}
             onValueChange={(value) =>
               handleChange("role", value as "buyer" | "seller")
             }
@@ -177,7 +181,7 @@ export function UserAuthForm() {
               className="w-full p-2 rounded-md text-gray-500 border-none text-[12px]"
               id="role"
             >
-              <SelectValue placeholder="Select role" />
+              <SelectValue placeholder="Select a role" />
             </SelectTrigger>
             <SelectContent className="absolute z-10 bg-white shadow-lg rounded-md">
               <SelectGroup>
