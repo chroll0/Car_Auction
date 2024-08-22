@@ -157,7 +157,7 @@ export function UserAuthForm() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-7 w-full max-w-[380px]"
+        className="space-y-8 w-full max-w-[380px]"
       >
         <div className="border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
           <div className="flex justify-between items-center">
@@ -228,10 +228,11 @@ export function UserAuthForm() {
           <input
             type="text"
             id="username"
-            {...register("username")}
+            {...register("username", {
+              onChange: (e) => handleChange("username", e.target.value),
+            })}
             onFocus={() => handleFocus("username")}
             onBlur={(e) => handleBlur("username", e.target.value)}
-            onChange={(e) => handleChange("username", e.target.value)}
             className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
         </div>
@@ -262,10 +263,11 @@ export function UserAuthForm() {
           <input
             type="text"
             id="email"
-            {...register("email")}
+            {...register("email", {
+              onChange: (e) => handleChange("email", e.target.value),
+            })}
             onFocus={() => handleFocus("email")}
             onBlur={(e) => handleBlur("email", e.target.value)}
-            onChange={(e) => handleChange("email", e.target.value)}
             className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
         </div>
@@ -296,10 +298,11 @@ export function UserAuthForm() {
           <input
             type={showPassword.password ? "text" : "password"}
             id="password"
-            {...register("password")}
+            {...register("password", {
+              onChange: (e) => handleChange("password", e.target.value),
+            })}
             onFocus={() => handleFocus("password")}
             onBlur={(e) => handleBlur("password", e.target.value)}
-            onChange={(e) => handleChange("password", e.target.value)}
             className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
           <span
@@ -341,10 +344,11 @@ export function UserAuthForm() {
           <input
             type={showPassword.confirmPassword ? "text" : "password"}
             id="confirmPassword"
-            {...register("confirmPassword")}
+            {...register("confirmPassword", {
+              onChange: (e) => handleChange("confirmPassword", e.target.value),
+            })}
             onFocus={() => handleFocus("confirmPassword")}
             onBlur={(e) => handleBlur("confirmPassword", e.target.value)}
-            onChange={(e) => handleChange("confirmPassword", e.target.value)}
             className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
           <span
@@ -438,7 +442,7 @@ export function UserAuthForm() {
           <Button
             type="submit"
             title="Sign up"
-            variant="w-[120px] py-3 flex items-center justify-center bg-darkBlue-200 text-white uppercase rounded-full text-[14px] font-semibold"
+            variant="w-[120px] py-3 flex items-center justify-center bg-darkBlue-200 text-white uppercase rounded-full text-[14px] hover:bg-indigo-500 font-semibold"
             action={handleSubmit(onSubmit)}
           />
         </div>

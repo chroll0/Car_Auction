@@ -26,18 +26,27 @@ export function UserLoginForm() {
         Welcome back to <br />
         the Auction Community
       </h2>
-      <div className="flex justify-between 2xl:flex-row flex-col gap-6">
+      <div className="flex justify-center gap-6 flex-wrap w-full sm:flex-row flex-col capitalize font-medium text-[13px]">
         <Button
           type="button"
-          title="Continue with Google"
+          title="Google"
           icon="/google.png"
-          variant="w-full px-4 py-[0.85rem] flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-100 text-slate-600 rounded-full text-[14px] font-semibold"
+          link="https://www.facebook.com/"
+          variant="sm:w-[130px] w-full px-4 py-3 flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-200 text-slate-600 rounded-full"
         />
         <Button
           type="button"
-          title="Continue with Facebook"
+          title="Facebook"
           icon="/facebook.png"
-          variant="w-full px-4 py-[0.85rem] flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-100 text-slate-600 rounded-full text-[14px] font-semibold"
+          link="https://www.facebook.com/"
+          variant="sm:w-[130px] w-full px-4 py-3 flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-200 text-slate-600 rounded-full"
+        />
+        <Button
+          type="button"
+          title="Apple"
+          icon="/apple.png"
+          link="https://appleid.apple.com/"
+          variant="sm:w-[130px] w-full px-4 py-3 flex items-center justify-center bg-slate-100 shadow-xl hover:bg-indigo-200 text-slate-600 rounded-full"
         />
       </div>
 
@@ -56,7 +65,7 @@ export function UserLoginForm() {
             value={email}
             placeholder="example@email.com"
             onChange={(e) => setEmail(e.target.value)}
-            className="p-2 w-full rounded-md text-gray-500 border-b-2 text-[12px]"
+            className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
         </div>
         <div>
@@ -74,7 +83,7 @@ export function UserLoginForm() {
               value={password}
               placeholder="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="p-2 w-full rounded-md text-gray-500 border-b-2 text-[12px]"
+              className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
             />
             <span
               className="absolute inset-y-3 right-4 flex items-end cursor-pointer"
@@ -88,15 +97,15 @@ export function UserLoginForm() {
           <div className="flex items-center">
             <label
               className="relative flex items-center p-3 rounded-full cursor-pointer"
-              htmlFor="remember"
+              htmlFor="terms"
             >
               <input
                 type="checkbox"
-                className="peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all before:absolute
-              before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full
-              before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-slate-300 checked:bg-indigo-100 
-              checked:before:bg-slate-300 before:bg-slate-300 hover:before:opacity-10"
-                id="remember"
+                className="peer relative h-4 w-4 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all before:absolute
+                before:top-2/4 before:left-2/4 before:block before:h-9 before:w-9 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full
+                before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-slate-300 checked:bg-indigo-100 
+                checked:before:bg-slate-300 before:bg-slate-300 hover:before:opacity-10"
+                id="terms"
               />
               <span className="absolute text-indigo-600 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
                 <svg
@@ -115,6 +124,7 @@ export function UserLoginForm() {
                 </svg>
               </span>
             </label>
+
             <label
               htmlFor="remember"
               className="block text-[11px] text-slate-400"

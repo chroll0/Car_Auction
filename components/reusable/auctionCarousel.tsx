@@ -39,10 +39,16 @@ const AuctionCarousel: React.FC<{ id: number }> = ({ id }) => {
   return (
     <Tilt
       options={{ max: 15, scale: 1.01, speed: 250 }}
-      className="flex flex-col gap-6 w-[310px] cursor-grab max-h-[450px] shadow-3xl shadow-skyBlue-100 rounded-[20px] py-10 px-6"
+      className="flex flex-col gap-8 w-[310px] cursor-grab max-h-[450px] shadow-3xl shadow-skyBlue-100 rounded-[20px] py-10 px-6"
     >
-      <div className="flex items-center justify-center">
-        <Image src={imgURL} alt={carName} width={280} height={200} />
+      <div className="flex items-center justify-center px-2">
+        <Image
+          src={imgURL}
+          alt={carName}
+          width={280}
+          height={200}
+          style={{ width: "auto", height: "auto" }}
+        />
       </div>
       <div className="flex flex-col relative">
         <span className="uppercase text-[24px] font-extrabold">

@@ -6,9 +6,9 @@ export const registrationSchema = yup.object().shape({
     .mixed<"buyer" | "seller">()
     .oneOf(["buyer", "seller"], "Role is not chosen")
     .required("Required"),
-  username: yup.string().min(2, "At least 2 characters").required("Required"),
+  username: yup.string().required("Required").min(2, "At least 2 characters"),
   email: yup.string().email("Invalid email format").required("Required"),
-  password: yup.string().min(6, "At least 6 characters").required("Required"),
+  password: yup.string().required("Required").min(6, "At least 6 characters"),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")

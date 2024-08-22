@@ -29,13 +29,14 @@ const Banner = () => {
                       {service.number}
                     </span>
                   </div>
-                  <div>
+                  <div className="w-[100px]">
                     <Image
                       src={service.icon}
                       alt={`Icon for ${service.title}`}
                       width={100}
                       height={100}
                       priority={true}
+                      style={{ width: "auto", height: "auto" }}
                     />
                   </div>
                 </div>
@@ -86,13 +87,14 @@ const Banner = () => {
                       {service.number}
                     </span>
                   </div>
-                  <div>
+                  <div className="w-[100px]">
                     <Image
                       src={service.icon}
                       alt={`Icon for ${service.title}`}
                       width={100}
                       height={100}
                       priority={true}
+                      style={{ width: "auto", height: "auto" }}
                     />
                   </div>
                 </div>
