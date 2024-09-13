@@ -66,7 +66,7 @@ const FilterBar = () => {
   };
 
   return (
-    <div className="max-w-[290px] h-auto pt-2 pb-6 shadow-4xl bg-slate-100 rounded-xl flex flex-col gap-4">
+    <div className="max-w-[290px] h-full pt-2 pb-6 shadow-4xl bg-skyBlue-10 rounded-xl flex flex-col gap-4">
       <div>
         <div className="px-4 py-3 flex justify-between items-center">
           <h3 className="text-[20px] font-bold">Filter</h3>

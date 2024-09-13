@@ -1,18 +1,12 @@
+import { registrationSchema } from "@/app/auth/components/validation-schema";
 import { Dispatch, SetStateAction } from "react";
-import { number } from "yup";
+import * as yup from "yup";
+
 export type ContextType = {
   userProfile: UserProfile;
   setUserProfile: Dispatch<SetStateAction<UserProfile>>;
 };
-export type UserProfile = {
-  role: undefined | "buyer" | "seller";
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  number?: string;
-  terms: boolean;
-};
+export type UserProfile = yup.InferType<typeof registrationSchema>;
 
 export type handleChangeProps = (
   field:

@@ -22,11 +22,12 @@ const config: Config = {
         "3xl": "1920px",
       },
       colors: {
+        blue: { 10: "#1572D3" },
         purple: { 100: "#6E34B9" },
         darkBlue: { 100: "#0F172A", 200: "#2A16A6" },
         gray: { 100: "#959595", 10: "#D4D4D8" },
         black: { 100: "#090914" },
-        skyBlue: { 100: "#7098FFA1" },
+        skyBlue: { 100: "#7098FFA1", 10: "#ECF5FF" },
         // Define gradients outside of the colors object
       },
       backgroundImage: {
@@ -71,7 +72,7 @@ const config: Config = {
         foreground: "hsl(var(--card-foreground))",
       },
       boxShadow: {
-        "3xl": "0 5px 15px 1px rgba(0, 0, 0, 0.1)",
+        "3xl": "0 0 15px 3px rgba(0, 0, 0, 0.1)",
         "4xl": "0 8px 20px 1px rgba(0, 0, 0, 0.2)",
       },
       borderRadius: {

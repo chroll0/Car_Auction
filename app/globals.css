@@ -4,6 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* For Chrome, Safari, Edge */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+/* For Firefox */
+input:-moz-autofill {
+  box-shadow: 0 0 0 1000px white inset !important;
+  -moz-text-fill-color: #000 !important;
+}
+
 body {
   overflow-x: hidden;
 }

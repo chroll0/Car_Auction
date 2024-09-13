@@ -5,13 +5,39 @@ export type InformationProps = {
   current: boolean;
   carName: string;
   lotNumber: string;
-  endTime: string;
   startTime: string;
+  endTime: string;
   imgURL: string;
   brand: string;
   condition: string;
-  type: string;
-  year: number;
+  fuelType: string;
+  transmission: string;
+  drivetrain: string;
+  bodyStyle: string;
+  exteriorColor: string;
+  interiorColor: string;
+  seatingCapacity: number;
+  engine: string;
+  horsepower: number;
+  torque: number;
+  doors: number;
+  topSpeed: string;
+  acceleration: string;
+  year: string;
+  location: string;
+  VIN: string;
+  previousOwners: number;
+  warranty: string;
+  features: string[];
+  safetyRatings: {
+    NHTSA: number;
+    IIHS: string;
+  };
+  auctionDetails: {
+    reserveMet: boolean;
+    startingBid: number;
+    bidIncrement: number;
+  };
 };
 
 export interface AvailableCarsProps {

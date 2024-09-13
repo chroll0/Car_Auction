@@ -17,17 +17,20 @@ import {
 import { registrationSchema } from "./validation-schema";
 import { handleChangeProps, UserProfile } from "@/types/authentication";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export function UserAuthForm() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
   });
 
-  const [isMounted, setIsMounted] = useState(false); // Track mounting
+  const [isMounted, setIsMounted] = useState(false);
 
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    role: undefined,
+    role: "",
     username: "",
     email: "",
     password: "",
@@ -41,6 +44,7 @@ export function UserAuthForm() {
     email: false,
     password: false,
     confirmPassword: false,
+    number: false,
   });
 
   useEffect(() => {
@@ -95,7 +99,7 @@ export function UserAuthForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      role: userProfile.role || undefined,
+      role: userProfile.role || "",
       username: userProfile.username || "",
       email: userProfile.email || "",
       password: userProfile.password || "",
@@ -109,17 +113,60 @@ export function UserAuthForm() {
   useEffect(() => {
     Object.keys(userProfile).forEach((key) => {
       const value = userProfile[key as keyof UserProfile];
-      setValue(key as keyof UserProfile, value === null ? undefined : value);
+      if (value !== undefined) {
+        setValue(key as keyof UserProfile, value);
+      }
     });
   }, [userProfile, setValue]);
 
-  const onSubmit: SubmitHandler<UserProfile> = (data) => {
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<UserProfile> = async (data) => {
     setUserProfile(data);
     console.log("Submitted Data:", data);
 
-    setTimeout(() => {
-      localStorage.clear();
-    }, 3000);
+    try {
+      const response = await fetch(`${apiUrl}/auth/signUp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any additional headers if required
+        },
+        body: JSON.stringify({
+          role: data.role,
+          username: data.username,
+          email: data.email,
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+          number: data.number,
+          terms: data.terms,
+        }),
+      });
+
+      // Check if response is OK
+      if (!response.ok) {
+        // Attempt to read error details from the response
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok: ${errorText}`);
+      }
+
+      // Handle successful response
+      const contentType = response.headers.get("Content-Type");
+      if (contentType && contentType.includes("application/json")) {
+        const result = await response.json();
+        console.log("Server Response:", result);
+      } else {
+        // Handle non-JSON responses
+        const result = await response.text();
+        console.log("Server Response (text or empty):", result);
+      }
+      setTimeout(() => {
+        localStorage.clear();
+        router.push("/auth/login");
+      }, 500);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   // Conditional rendering to avoid SSR/client mismatch
@@ -159,7 +206,7 @@ export function UserAuthForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-8 w-full max-w-[380px]"
       >
-        <div className="border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
+        <div>
           <div className="flex justify-between items-center">
             <label
               className="block px-2 text-[13px] font-semibold text-gray-500 capitalize"
@@ -178,7 +225,7 @@ export function UserAuthForm() {
             }
           >
             <SelectTrigger
-              className="w-full p-2 rounded-md text-gray-500 border-none text-[12px]"
+              className="w-full p-2 rounded-md text-gray-500 border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
               id="role"
             >
               <SelectValue placeholder="Select a role" />
@@ -368,35 +415,57 @@ export function UserAuthForm() {
           </span>
         </div>
 
-        {/* <PhoneInput
-          country={"ge"}
-          value={userProfile.number || ""}
-          onChange={(value) => handleChange("number", value)}
-          inputStyle={{
-            width: "100%",
-            border: "none",
-            borderBottom: "1px solid #D1D5DB",
-            fontSize: "12px",
-            color: "#6B7280",
-            paddingLeft: "45px",
-          }}
-          buttonStyle={{
-            border: "none",
-            background: "none",
-            padding: 0,
-          }}
-          dropdownStyle={{
-            width: "220px",
-            height: "200px",
-            padding: "10px",
-          }}
-          containerStyle={{
-            display: "flex",
-            alignItems: "center",
-            width: "100%",
-          }}
-        /> */}
-        {/* <p className="text-red-500 text-sm">{errors.number?.message}</p> */}
+        <div className="relative">
+          <div className="flex justify-between items-center">
+            <label
+              className="block px-2 text-[13px] font-semibold text-gray-500 capitalize"
+              htmlFor="role"
+            >
+              Phone
+            </label>
+            <p className="flex justify-end text-red-500 px-2 transition-all text-[11.5px]">
+              {errors.number?.message}
+            </p>
+          </div>
+          <PhoneInput
+            country={"ge"}
+            value={userProfile.number || ""}
+            onChange={(value) => handleChange("number", value)}
+            inputStyle={{
+              width: "100%",
+              border: "none",
+              borderBottom: `2px solid ${
+                activeState.number ? "#3B82F6" : "#D1D5DB"
+              }`, // Change border color on focus
+              fontSize: "12px",
+              color: "#6B7280",
+              paddingLeft: "45px",
+              borderRadius: "0",
+              outline: "none", // Remove default focus outline
+            }}
+            inputProps={{
+              onFocus: () =>
+                setActiveState((prev) => ({ ...prev, number: true })),
+              onBlur: () =>
+                setActiveState((prev) => ({ ...prev, number: false })),
+            }}
+            buttonStyle={{
+              border: "none",
+              background: "none",
+              padding: 0,
+            }}
+            dropdownStyle={{
+              width: "220px",
+              height: "200px",
+              padding: "10px",
+            }}
+            containerStyle={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+            }}
+          />
+        </div>
 
         <div className="flex items-center sm:flex-row flex-col justify-between gap-4 sm:gap-10">
           <div className="flex items-center">

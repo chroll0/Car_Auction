@@ -2,22 +2,25 @@ export const navLinks = [
   {
     id: "auctions",
     title: "Auctions",
+    preTitle: {},
   },
   {
-    id: "buyers",
-    title: "Buyers",
+    id: "find_cars",
+    title: "Find cars",
+    preTitle: {},
   },
   {
-    id: "sellers",
-    title: "Sellers",
+    id: "sell_cars",
+    title: "Sell cars",
   },
   {
-    id: "contact_us",
-    title: "Contact Us",
+    id: "information",
+    title: "How to buy",
   },
   {
     id: "other",
     title: "Other",
+    preTitle: {},
   },
 ];
 
