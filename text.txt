@@ -1,0 +1,42 @@
+        <div>
+          <div className="flex justify-between items-center">
+            <label
+              className="block px-2 text-[13px] font-semibold text-gray-500 capitalize"
+              htmlFor="role"
+            >
+              role
+            </label>
+            <p className="flex justify-end text-red-500 text-[11px] px-2">
+              {errors.role?.message}
+            </p>
+          </div>
+          <Select
+            defaultValue={userProfile.role || ""}
+            onValueChange={(value) =>
+              handleChange("role", value as "buyer" | "seller")
+            }
+          >
+            <SelectTrigger
+              className="w-full p-2 rounded-md text-gray-500 border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
+              id="role"
+            >
+              <SelectValue placeholder="Select a role" />
+            </SelectTrigger>
+            <SelectContent className="absolute z-10 bg-white shadow-lg rounded-md">
+              <SelectGroup>
+                <SelectItem
+                  value="seller"
+                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-gray-500 appearance-none"
+                >
+                  Seller
+                </SelectItem>
+                <SelectItem
+                  value="buyer"
+                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-gray-500 appearance-none"
+                >
+                  Buyer
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>

@@ -10,8 +10,8 @@ export type UserProfile = yup.InferType<typeof registrationSchema>;
 
 export type handleChangeProps = (
   field:
-    | "username"
-    | "role"
+    | "firstName"
+    | "lastName"
     | "email"
     | "password"
     | "confirmPassword"

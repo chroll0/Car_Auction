@@ -1,37 +1,33 @@
 "use client";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import axios from "axios";
+
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useEffect, useState } from "react";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+
 import { Button } from "@/components/reusable";
-import Link from "next/link";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { registrationSchema } from "./validation-schema";
 import { handleChangeProps, UserProfile } from "@/types/authentication";
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { useRouter } from "next/navigation";
 
 export function UserAuthForm() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const router = useRouter();
 
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
   });
-
   const [isMounted, setIsMounted] = useState(false);
 
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    role: "",
-    username: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -40,7 +36,8 @@ export function UserAuthForm() {
   });
 
   const [activeState, setActiveState] = useState({
-    username: false,
+    firstName: false,
+    lastName: false,
     email: false,
     password: false,
     confirmPassword: false,
@@ -48,8 +45,7 @@ export function UserAuthForm() {
   });
 
   useEffect(() => {
-    setIsMounted(true); // Mark component as mounted
-
+    setIsMounted(true);
     if (typeof window !== "undefined") {
       // Load userProfile and activeState from localStorage
       const savedProfile = localStorage.getItem("userProfile");
@@ -99,8 +95,8 @@ export function UserAuthForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      role: userProfile.role || "",
-      username: userProfile.username || "",
+      firstName: userProfile.firstName || "",
+      lastName: userProfile.lastName || "",
       email: userProfile.email || "",
       password: userProfile.password || "",
       confirmPassword: userProfile.confirmPassword || "",
@@ -119,56 +115,39 @@ export function UserAuthForm() {
     });
   }, [userProfile, setValue]);
 
-  const router = useRouter();
-
+  // submit function
   const onSubmit: SubmitHandler<UserProfile> = async (data) => {
     setUserProfile(data);
     console.log("Submitted Data:", data);
-
     try {
-      const response = await fetch(`${apiUrl}/auth/signUp`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Add any additional headers if required
-        },
-        body: JSON.stringify({
-          role: data.role,
-          username: data.username,
-          email: data.email,
-          password: data.password,
-          confirmPassword: data.confirmPassword,
-          number: data.number,
-          terms: data.terms,
-        }),
+      const response = await axios.post(`${apiUrl}/auth/signUp`, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        number: data.number,
+        password: data.password,
       });
 
-      // Check if response is OK
-      if (!response.ok) {
-        // Attempt to read error details from the response
-        const errorText = await response.text();
-        throw new Error(`Network response was not ok: ${errorText}`);
+      // Handle successful response
+      if (response.status === 200) {
+        console.log("Server Response:", response.data);
+      } else {
+        // Handle non-200 responses
+        console.log("Unexpected status code:", response.status);
       }
 
-      // Handle successful response
-      const contentType = response.headers.get("Content-Type");
-      if (contentType && contentType.includes("application/json")) {
-        const result = await response.json();
-        console.log("Server Response:", result);
-      } else {
-        // Handle non-JSON responses
-        const result = await response.text();
-        console.log("Server Response (text or empty):", result);
-      }
       setTimeout(() => {
         localStorage.clear();
         router.push("/auth/login");
       }, 500);
     } catch (error) {
-      console.error("Error:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error:", error.response?.data || error.message);
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };
-
   // Conditional rendering to avoid SSR/client mismatch
   if (!isMounted) return null;
 
@@ -178,6 +157,8 @@ export function UserAuthForm() {
         Welcome to <br />
         the Auction Community
       </h2>
+
+      {/* connections */}
       <div className="flex justify-center gap-6 flex-wrap w-full sm:flex-row flex-col capitalize font-medium text-[13px]">
         <Button
           type="button"
@@ -206,84 +187,79 @@ export function UserAuthForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-8 w-full max-w-[380px]"
       >
-        <div>
-          <div className="flex justify-between items-center">
-            <label
-              className="block px-2 text-[13px] font-semibold text-gray-500 capitalize"
-              htmlFor="role"
-            >
-              role
-            </label>
-            <p className="flex justify-end text-red-500 text-[11px] px-2">
-              {errors.role?.message}
-            </p>
-          </div>
-          <Select
-            defaultValue={userProfile.role || ""}
-            onValueChange={(value) =>
-              handleChange("role", value as "buyer" | "seller")
-            }
-          >
-            <SelectTrigger
-              className="w-full p-2 rounded-md text-gray-500 border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
-              id="role"
-            >
-              <SelectValue placeholder="Select a role" />
-            </SelectTrigger>
-            <SelectContent className="absolute z-10 bg-white shadow-lg rounded-md">
-              <SelectGroup>
-                <SelectItem
-                  value="seller"
-                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-gray-500 appearance-none"
-                >
-                  Seller
-                </SelectItem>
-                <SelectItem
-                  value="buyer"
-                  className="cursor-pointer py-2.5 px-8 w-full text-sm text-gray-500 appearance-none"
-                >
-                  Buyer
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-
+        {/* firstName input */}
         <div>
           <div className="flex justify-between items-center relative">
             <label
-              htmlFor="username"
+              htmlFor="firstName"
               className={`px-2 font-semibold text-gray-500 capitalize absolute transition-all duration-200 ${
-                activeState.username
+                activeState.firstName
                   ? "top-[-15px] text-[11px]"
                   : "top-[8px] text-[13px]"
               }`}
             >
-              username
+              first name
             </label>
             <p
-              className={`absolute right-1 flex justify-end text-red-500 px-2 transition-all
+              className={`absolute right-3 flex justify-end text-red-500 px-2 transition-all
             ${
-              activeState.username
+              activeState.firstName
                 ? "top-[-15px] text-[11px]"
                 : "top-[8px] text-[11.5px]"
             }`}
             >
-              {errors.username?.message}
+              {errors.firstName?.message}
             </p>
           </div>
           <input
             type="text"
-            id="username"
-            {...register("username", {
-              onChange: (e) => handleChange("username", e.target.value),
+            id="firstName"
+            {...register("firstName", {
+              onChange: (e) => handleChange("firstName", e.target.value),
             })}
-            onFocus={() => handleFocus("username")}
-            onBlur={(e) => handleBlur("username", e.target.value)}
-            className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
+            onFocus={() => handleFocus("firstName")}
+            onBlur={(e) => handleBlur("firstName", e.target.value)}
+            className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
         </div>
 
+        {/* lastName input */}
+        <div>
+          <div className="flex justify-between items-center relative">
+            <label
+              htmlFor="lastName"
+              className={`px-2 font-semibold text-gray-500 capitalize absolute transition-all duration-200 ${
+                activeState.lastName
+                  ? "top-[-15px] text-[11px]"
+                  : "top-[8px] text-[13px]"
+              }`}
+            >
+              last name
+            </label>
+            <p
+              className={`absolute right-3 flex justify-end text-red-500 px-2 transition-all
+            ${
+              activeState.lastName
+                ? "top-[-15px] text-[11px]"
+                : "top-[8px] text-[11.5px]"
+            }`}
+            >
+              {errors.lastName?.message}
+            </p>
+          </div>
+          <input
+            type="text"
+            id="lastName"
+            {...register("lastName", {
+              onChange: (e) => handleChange("lastName", e.target.value),
+            })}
+            onFocus={() => handleFocus("lastName")}
+            onBlur={(e) => handleBlur("lastName", e.target.value)}
+            className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
+          />
+        </div>
+
+        {/* email input */}
         <div>
           <div className="flex justify-between items-center relative">
             <label
@@ -297,7 +273,7 @@ export function UserAuthForm() {
               email
             </label>
             <p
-              className={`absolute right-1 flex justify-end text-red-500 px-2 transition-all
+              className={`absolute right-3 flex justify-end text-red-500 px-2 transition-all
             ${
               activeState.email
                 ? "top-[-15px] text-[11px]"
@@ -315,10 +291,11 @@ export function UserAuthForm() {
             })}
             onFocus={() => handleFocus("email")}
             onBlur={(e) => handleBlur("email", e.target.value)}
-            className="p-2 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
+            className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
         </div>
 
+        {/* password input */}
         <div className="relative">
           <div className="flex justify-between items-center relative">
             <label
@@ -329,7 +306,7 @@ export function UserAuthForm() {
                   : "top-[8px] text-[13px]"
               }`}
             >
-              password
+              new password
             </label>
             <p
               className={`absolute right-3 flex justify-end text-red-500 px-2 transition-all
@@ -353,7 +330,7 @@ export function UserAuthForm() {
             className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
           <span
-            className="absolute inset-y-6 right-0 flex items-end cursor-pointer"
+            className="absolute inset-y-6 right-0.5 flex items-end cursor-pointer"
             onClick={() =>
               setShowPassword((prevState) => ({
                 ...prevState,
@@ -365,6 +342,7 @@ export function UserAuthForm() {
           </span>
         </div>
 
+        {/* confirm password input */}
         <div className="relative">
           <div className="flex justify-between items-center relative">
             <label
@@ -399,7 +377,7 @@ export function UserAuthForm() {
             className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
           <span
-            className="absolute inset-y-6 right-0 flex items-end cursor-pointer"
+            className="absolute inset-y-6 right-0.5 flex items-end cursor-pointer"
             onClick={() =>
               setShowPassword((prevState) => ({
                 ...prevState,
@@ -415,15 +393,16 @@ export function UserAuthForm() {
           </span>
         </div>
 
+        {/* phone number input */}
         <div className="relative">
           <div className="flex justify-between items-center">
             <label
               className="block px-2 text-[13px] font-semibold text-gray-500 capitalize"
-              htmlFor="role"
+              htmlFor="lastName"
             >
-              Phone
+              mobile number
             </label>
-            <p className="flex justify-end text-red-500 px-2 transition-all text-[11.5px]">
+            <p className="flex justify-end text-red-500 px-2 mr-3 transition-all text-[11.5px]">
               {errors.number?.message}
             </p>
           </div>
@@ -436,10 +415,11 @@ export function UserAuthForm() {
               border: "none",
               borderBottom: `2px solid ${
                 activeState.number ? "#3B82F6" : "#D1D5DB"
-              }`, // Change border color on focus
+              }`,
               fontSize: "12px",
               color: "#6B7280",
               paddingLeft: "45px",
+              paddingRight: "20px",
               borderRadius: "0",
               outline: "none", // Remove default focus outline
             }}
@@ -468,6 +448,7 @@ export function UserAuthForm() {
         </div>
 
         <div className="flex items-center sm:flex-row flex-col justify-between gap-4 sm:gap-10">
+          {/* checkbox input */}
           <div className="flex items-center">
             <label
               className="relative flex items-center p-3 rounded-full cursor-pointer"
@@ -508,6 +489,8 @@ export function UserAuthForm() {
               I accept the terms & Condition
             </label>
           </div>
+
+          {/* submit button */}
           <Button
             type="submit"
             title="Sign up"
