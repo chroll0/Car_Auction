@@ -28,7 +28,7 @@ const Search = () => {
           value={model}
           onChange={(e) => setModel(e.target.value)}
           placeholder="Search car by name or vin code"
-          className="py-[9px] px-3 pl-14 rounded-[10px] w-full outline-none bg-skyBlue-10 text-[14px] tracking-wide"
+          className="py-2 px-3 pl-14 rounded-[10px] w-full outline-none bg-skyBlue-10 text-[16px] tracking-wide"
         />
       </div>
 

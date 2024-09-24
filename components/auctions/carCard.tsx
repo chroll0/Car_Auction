@@ -48,7 +48,7 @@ const CarCard: React.FC<{ id: number }> = ({ id }) => {
 
   return (
     <div className="rounded-[10px] overflow-hidden shadow-3xl bg-skyBlue-10 hover:bg-white transition-all cursor-pointer px-5 py-6 flex gap-8 justify-between">
-      <div className="flex justify-between items-start gap-6">
+      <div className="flex justify-between items-start gap-8">
         <div className="max-w-[360px]">
           <Image
             src={imgURL}

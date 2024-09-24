@@ -9,7 +9,7 @@ const AuctionsList = () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-10 items-center justify-around">
+      <div className="flex flex-wrap gap-10 items-center justify-start">
         {auctionInformation
           .filter((element) => element.current)
           .map((element) => (

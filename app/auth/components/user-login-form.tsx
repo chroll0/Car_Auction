@@ -258,7 +258,6 @@ export function UserLoginForm() {
                 </svg>
               </span>
             </label>
-
             <label
               htmlFor="remember"
               className="text-indigo-400 block text-[11px] cursor-pointer"

@@ -25,8 +25,8 @@ const config: Config = {
         blue: { 10: "#1572D3" },
         purple: { 100: "#6E34B9" },
         darkBlue: { 100: "#0F172A", 200: "#2A16A6" },
-        gray: { 100: "#959595", 10: "#D4D4D8" },
-        black: { 100: "#090914" },
+        gray: { 100: "#959595", 50: "#6D6D6D", 10: "#D4D4D8" },
+        black: { 100: "#090914", 90: "#242424" },
         skyBlue: { 100: "#7098FFA1", 10: "#ECF5FF" },
         // Define gradients outside of the colors object
       },

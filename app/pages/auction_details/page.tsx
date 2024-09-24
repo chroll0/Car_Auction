@@ -6,7 +6,7 @@ import {
 
 const AuctionDetails = () => {
   return (
-    <div className="flex paddingX paddingY gap-8 justify-center">
+    <div className="flex flex-col paddingX paddingY gap-8 justify-center">
       <Gallery />
       <CarInformation />
       <BidInformation />
