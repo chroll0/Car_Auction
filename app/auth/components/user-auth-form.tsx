@@ -20,7 +20,7 @@ export function UserAuthForm() {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState({
-    password: false,
+    newPassword: false,
     confirmPassword: false,
   });
   const [isMounted, setIsMounted] = useState(false);
@@ -29,7 +29,7 @@ export function UserAuthForm() {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
+    newPassword: "",
     confirmPassword: "",
     number: "",
     terms: false,
@@ -39,7 +39,7 @@ export function UserAuthForm() {
     firstName: false,
     lastName: false,
     email: false,
-    password: false,
+    newPassword: false,
     confirmPassword: false,
     number: false,
   });
@@ -98,10 +98,10 @@ export function UserAuthForm() {
       firstName: userProfile.firstName || "",
       lastName: userProfile.lastName || "",
       email: userProfile.email || "",
-      password: userProfile.password || "",
+      newPassword: userProfile.newPassword || "",
       confirmPassword: userProfile.confirmPassword || "",
       number: userProfile.number || "",
-      terms: userProfile.terms || false,
+      terms: false,
     },
     resolver: yupResolver(registrationSchema),
   });
@@ -125,7 +125,7 @@ export function UserAuthForm() {
         lastName: data.lastName,
         email: data.email,
         number: data.number,
-        password: data.password,
+        password: data.newPassword,
       });
 
       // Handle successful response
@@ -185,7 +185,7 @@ export function UserAuthForm() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-8 w-full max-w-[380px]"
+        className="space-y-8 w-full max-w-[380px] mt-4"
       >
         {/* firstName input */}
         <div>
@@ -295,13 +295,13 @@ export function UserAuthForm() {
           />
         </div>
 
-        {/* password input */}
+        {/* new Password input */}
         <div className="relative">
           <div className="flex justify-between items-center relative">
             <label
-              htmlFor="password"
+              htmlFor="newPassword"
               className={`px-2 font-semibold text-gray-500 capitalize absolute transition-all duration-200 ${
-                activeState.password
+                activeState.newPassword
                   ? "top-[-15px] text-[11px]"
                   : "top-[8px] text-[13px]"
               }`}
@@ -311,22 +311,22 @@ export function UserAuthForm() {
             <p
               className={`absolute right-3 flex justify-end text-red-500 px-2 transition-all
             ${
-              activeState.password
+              activeState.newPassword
                 ? "top-[-15px] text-[11px]"
                 : "top-[8px] text-[11.5px]"
             }`}
             >
-              {errors.password?.message}
+              {errors.newPassword?.message}
             </p>
           </div>
           <input
-            type={showPassword.password ? "text" : "password"}
-            id="password"
-            {...register("password", {
-              onChange: (e) => handleChange("password", e.target.value),
+            type={showPassword.newPassword ? "text" : "password"}
+            id="newPassword"
+            {...register("newPassword", {
+              onChange: (e) => handleChange("newPassword", e.target.value),
             })}
-            onFocus={() => handleFocus("password")}
-            onBlur={(e) => handleBlur("password", e.target.value)}
+            onFocus={() => handleFocus("newPassword")}
+            onBlur={(e) => handleBlur("newPassword", e.target.value)}
             className="p-2 pr-5 w-full rounded-md text-gray-500 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 text-[12px]"
           />
           <span
@@ -334,11 +334,11 @@ export function UserAuthForm() {
             onClick={() =>
               setShowPassword((prevState) => ({
                 ...prevState,
-                password: !prevState.password,
+                newPassword: !prevState.newPassword,
               }))
             }
           >
-            {showPassword.password ? <IoEyeOffOutline /> : <IoEyeOutline />}
+            {showPassword.newPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
           </span>
         </div>
 
@@ -421,7 +421,7 @@ export function UserAuthForm() {
               paddingLeft: "45px",
               paddingRight: "20px",
               borderRadius: "0",
-              outline: "none", // Remove default focus outline
+              outline: "none",
             }}
             inputProps={{
               onFocus: () =>
@@ -498,19 +498,19 @@ export function UserAuthForm() {
             action={handleSubmit(onSubmit)}
           />
         </div>
-
-        <div className="mt-10 text-center">
-          <p className="text-[13px] text-gray-600">
-            Own an Account?
-            <Link
-              href="/auth/login"
-              className="text-black-100 font-bold hover:underline hover:text-blue-700 ml-2"
-            >
-              JUMP RIGHT IN
-            </Link>
-          </p>
-        </div>
       </form>
+
+      <div className="mt-6 text-center">
+        <p className="text-[13px] text-gray-600">
+          Own an Account?
+          <Link
+            href="/auth/login"
+            className="text-black-100 font-bold hover:underline hover:text-blue-700 ml-2"
+          >
+            JUMP RIGHT IN
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

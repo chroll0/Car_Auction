@@ -6,7 +6,7 @@ export const registrationSchema = yup.object().shape({
   firstName: yup.string().required("Required").min(2, "At least 2 characters"),
   lastName: yup.string().required("Required").min(2, "At least 2 characters"),
   email: yup.string().email("Invalid email format").required("Required"),
-  password: yup
+  newPassword: yup
     .string()
     .required("Required")
     .min(8, "At least 8 characters")
@@ -29,4 +29,10 @@ export const registrationSchema = yup.object().shape({
       const phoneNumber = parsePhoneNumberFromString(formattedValue);
       return phoneNumber?.isValid() || false;
     }),
+});
+
+export const loginSchema = yup.object().shape({
+  emailOrPhone: yup.string().required("Required"),
+  password: yup.string().required("Required"),
+  remember: yup.boolean(),
 });
