@@ -96,15 +96,15 @@ const BidInformation = () => {
           I love the Porsche 928, as it boasts futuristic styling, excellent
           performance, and a big V8. This particular example is a desirable
           1986.5 928 S, which means it gets the upgraded brakes and suspension
-          of the later S4 model. It's also fitted with numerous modifications
-          intended to enhance its performance and style - including 18-inch
-          Turbo Twist wheels, 928 S4 GT front mufflers, Bosch fuel injectors, a
-          Porken timing belt tensioner, BOGE front shocks, and a beautifully
-          reupholstered interior. This 928 also comes with a clean,
-          accident-free Carfax report and Lemon Squad pre-purchase inspection,
-          for added bidder confidence. Plus, this 928 S is offered with the
-          thrill of no reserve! also comes with a clean, accident-free Carfax
-          report and Lemon
+          of the later S4 model. It&apos;s also fitted with numerous
+          modifications intended to enhance its performance and style -
+          including 18-inch Turbo Twist wheels, 928 S4 GT front mufflers, Bosch
+          fuel injectors, a Porken timing belt tensioner, BOGE front shocks, and
+          a beautifully reupholstered interior. This 928 also comes with a
+          clean, accident-free Carfax report and Lemon Squad pre-purchase
+          inspection, for added bidder confidence. Plus, this 928 S is offered
+          with the thrill of no reserve! also comes with a clean, accident-free
+          Carfax report and Lemon
         </p>
         <p className="text-[16px] leading-[19px] text-blue-10">Read More</p>
       </div>
