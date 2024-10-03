@@ -13,18 +13,16 @@ const config: Config = {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
     },
     extend: {
       screens: {
         "3xl": "1920px",
+        "2xl": "1400px",
       },
       colors: {
         blue: { 10: "#1572D3" },
         purple: { 100: "#6E34B9" },
-        darkBlue: { 100: "#0F172A", 200: "#2A16A6" },
+        darkBlue: { 100: "#0F172A", 200: "#2A16A6", 300: "#051C34" },
         gray: { 100: "#959595", 50: "#6D6D6D", 10: "#D4D4D8" },
         black: { 100: "#090914", 90: "#242424" },
         skyBlue: { 100: "#7098FFA1", 10: "#ECF5FF" },

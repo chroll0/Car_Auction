@@ -15,7 +15,7 @@ export const registrationSchema = yup.object().shape({
     .matches(/[@$!%*?&#^_]/, "At least one special character"),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
+    .oneOf([yup.ref("newPassword")], "Passwords must match")
     .required("Required"),
   terms: yup.boolean().oneOf([true]).required(),
   number: yup

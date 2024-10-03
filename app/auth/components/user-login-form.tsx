@@ -1,13 +1,15 @@
 "use client";
 
+import axios from "axios";
 import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Button } from "@/components/reusable";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { handleLoginProps, LoginProfile } from "@/types/authentication";
 import { loginSchema } from "./validation-schema";
 
@@ -98,12 +100,38 @@ export function UserLoginForm() {
     });
   }, [loginProfile, setValue]);
 
-  const onSubmit: SubmitHandler<LoginProfile> = (data) => {
+  // submit function
+  const onSubmit: SubmitHandler<LoginProfile> = async (data) => {
     setLoginProfile(data);
     console.log(data);
-    router.push("/");
-  };
 
+    try {
+      const response = await axios.post(`${apiUrl}/auth/logIn`, {
+        login: data.emailOrPhone,
+        password: data.password,
+      });
+
+      // Handle successful response
+      if (response.status === 200) {
+        console.log("Server Response:", response.data);
+      } else {
+        // Handle non-200 responses
+        console.log("Unexpected status code:", response.status);
+      }
+
+      setTimeout(() => {
+        localStorage.clear();
+        router.push("/");
+      }, 500);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error:", error.response?.data || error.message);
+      } else {
+        console.error("Unexpected error:", error);
+      }
+    }
+  };
+  // Conditional rendering to avoid SSR/client mismatch
   if (!isMounted) return null;
 
   return (

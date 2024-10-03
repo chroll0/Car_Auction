@@ -1,11 +1,12 @@
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import Link from "next/link";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -48,11 +49,15 @@ export function UserAuthForm() {
     setIsMounted(true);
     if (typeof window !== "undefined") {
       // Load userProfile and activeState from localStorage
-      const savedProfile = localStorage.getItem("userProfile");
-      const savedState = localStorage.getItem("activeState");
+      try {
+        const savedProfile = localStorage.getItem("userProfile");
+        const savedState = localStorage.getItem("activeState");
 
-      if (savedProfile) setUserProfile(JSON.parse(savedProfile));
-      if (savedState) setActiveState(JSON.parse(savedState));
+        if (savedProfile) setUserProfile(JSON.parse(savedProfile));
+        if (savedState) setActiveState(JSON.parse(savedState));
+      } catch (error) {
+        console.error("Failed to load from localStorage", error);
+      }
     }
   }, []);
 
