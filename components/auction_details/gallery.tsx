@@ -36,7 +36,7 @@ const Gallery = () => {
           {gallery.map((element, index) => (
             <div
               key={index}
-              className="w-[200px] h-[110px] rounded-[10px] transition-all cursor-pointer border-[2.5px] border-white hover:border-blue-10"
+              className="rounded-[10px] transition-all cursor-pointer border-[2.5px] border-white hover:border-blue-10"
               onClick={() => handleThumbnailClick(element)}
             >
               <Image

@@ -1,9 +1,9 @@
 const CarInformation = () => {
   return (
     <div className="bg-skyBlue-10 rounded-[10px] p-5 w-full max-w-[450px] space-y-3">
-      <h3 className="text-[20px] font-semibold leading-[30px] capitalize text-black-90 border-b-[1px] pb-2 border-blue-10">
+      <h2 className="text-[20px] font-semibold leading-[30px] capitalize text-black-90 border-b-[1px] pb-2 border-blue-10">
         Vehicle Information
-      </h3>
+      </h2>
       <div className="flex gap-14">
         <span className="text-[16px] font-medium capitalize text-gray-50 leading-[24px] w-[100px]">
           make

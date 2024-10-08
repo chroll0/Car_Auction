@@ -1,6 +1,7 @@
 import {
   BidInformation,
   CarInformation,
+  Comments,
   Gallery,
 } from "@/components/auction_details";
 
@@ -19,6 +20,7 @@ const AuctionDetails = () => {
         <BidInformation />
         <CarInformation />
       </div>
+      <Comments />
     </div>
   );
 };
